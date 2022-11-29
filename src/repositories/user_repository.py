@@ -33,12 +33,4 @@ class UserRepository:
         self._users = users
         return user
 
-    def delete(self, user):
-        does_user_exist = self.find_by_username(user.username)
-
-        if does_user_exist:
-            raise Exception(
-                f"Käyttäjää ei ole olemassa"
-            )
-
 user_repository = UserRepository()
