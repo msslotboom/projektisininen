@@ -39,12 +39,11 @@ class UserRepository:
     def create_new_user(self, user):
         users = self.find_all()
         does_user_exist = self.find_by_username(user.username)
-        print(does_user_exist)
+
         if does_user_exist:
             raise Exception(
                 f"Käyttäjänimi {user.username} on jo käytössä"
             )
-        print("myy")
         
         sql = "INSERT INTO users(id, username, password) VALUES (%s,%s,%s)"
         id = len(users) + 1
