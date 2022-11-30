@@ -1,5 +1,5 @@
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY,
     username TEXT,
     password TEXT
 );
