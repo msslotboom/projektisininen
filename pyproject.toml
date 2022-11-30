@@ -6,7 +6,7 @@ authors = ["Your Name <you@example.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.8"
 flask = "^2.2.2"
 psycopg2 = "^2.9.5"
 flask-sqlalchemy = "^3.0.2"
