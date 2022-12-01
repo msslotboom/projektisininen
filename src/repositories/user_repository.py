@@ -1,16 +1,5 @@
 from entities.user import User
-import psycopg2
-import os
-
-conn = psycopg2.connect(
-    dbname=os.environ.get("POSTGRES_DB"),
-    user=os.environ.get("POSTGRES_USER"),
-    password=os.environ.get("POSTGRES_PASS"),
-    host=os.environ.get("POSTGRES_HOST"),
-    port=os.environ.get("POSTGRES_PORT")
-)
-
-cursor = conn.cursor()
+from db import db
 
 
 class UserRepository:
@@ -20,8 +9,8 @@ class UserRepository:
     def find_all(self):
         users = []
         query = "SELECT username, password FROM users"
-        cursor.execute(query)
-        for row in cursor.fetchall():
+        db.execute(query)
+        for row in db.fetchall():
             users.append(User(row[0],row[1]))
         self._users = users
         return self._users
@@ -48,7 +37,7 @@ class UserRepository:
         sql = "INSERT INTO users(id, username, password) VALUES (%s,%s,%s)"
         id = len(users) + 1
         insert = (id, user.username, user.password)
-        cursor.execute(sql,insert)
+        db.execute(sql,insert)
 
         users.append(user)
         self._users = users
