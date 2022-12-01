@@ -14,8 +14,14 @@ class CitationRepository:
 
         self._citations.append()
 
-    '''
-    Viitteiden haku tähän
-    '''
+    def get_all_citations(self, user_id):
+        sql = """SELECT * FROM citations WHERE owner_id=%s
+        """
+        db.execute(sql, user_id)
+        citations = []
+        for row in db.fetchall():
+            citations.append(row)
+        self._citations = citations
+        return self._citations
 
 citation_repository = CitationRepository()
