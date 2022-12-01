@@ -39,15 +39,12 @@ class UserService:
             raise UserInputError("Käyttäjänimi ja salasana vaaditaan")
     
     def login(self, username):
-        user = self._user_repo.find_by_username(username)
-        session["user_username"] = user.username
-        session["user_id"] = user.id
+        session["user_username"] = username
         session["csrf_token"] = token_hex(16)
     
 
     def logout(self):
         del session["user_username"]
-        del session["user_id"]
         del session["csrf_token"]
 
 
