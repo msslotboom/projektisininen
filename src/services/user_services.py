@@ -33,6 +33,10 @@ class UserService:
         )
 
         return user
+    
+    def get_user_id_by_name(self):
+        username = session["user_username"]
+        return self._user_repo.get_id(username)
 
     def validate_user(self, username, password, password_confirmation):
         if not username or not password:
@@ -46,6 +50,10 @@ class UserService:
     def logout(self):
         del session["user_username"]
         del session["csrf_token"]
+    
+    def check_csrf(self, crsf_token):
+        if crsf_token != session["csrf_token"]:
+            raise AuthenticationError("CSRF eroavuus")
 
 
 user_service = UserService()

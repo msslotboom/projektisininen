@@ -9,6 +9,7 @@ from flask import (
 )
 
 from services.user_services import user_service
+from services.citation_services import citation_service
 
 app = Flask(__name__)
 app.secret_key = getenv("SECRET_KEY")
@@ -65,3 +66,25 @@ def handle_register():
         flash(str(error))
         return redirect_to_register()
 
+@app.route("/new_citation", methods=["GET"])
+def render_new_citation():
+    return render_template("new_citation.html")
+
+@app.route("/new_citation", methods=["POST"])
+def handle_new_citation():
+    try:
+        csrf_token = request.form["crsf_token"]
+        user_service.check_csrf(csrf_token)
+        
+    except Exception as error:
+        flash(str(error))
+        return redirect_to_home()
+
+    owner_id = user_service.get_user_id_by_name()
+    authors = request.form.get("authors")
+    title = request.form.get("title")
+    year = request.form.get("year")
+    citation_service.create_citation(
+        owner_id, authors, title, year
+    )
+    redirect_to_home()

@@ -43,5 +43,10 @@ class UserRepository:
         self._users = users
 
         return user
+    
+    def get_id(self, username):
+        query = """SELECT id FROM users WHERE username=:username"""
+        id_value = db.execute(query, {"username":username}).fetchone()[0]
+        return id_value
 
 user_repository = UserRepository()
