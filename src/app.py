@@ -37,11 +37,19 @@ def handle_login():
 
     try:
         user_service.validate_credentials(username, password)
-        user_service.login(username)
+        try:
+            user_service.login(username)
+        except Exception as error:
+            flash(str(error))
         return redirect_to_home()
     except Exception as error:
         flash(str(error))
         return redirect_to_register()
+
+@app.route("/logout")
+def handle_logout():
+    user_service.logout()
+    return redirect_to_home()
 
 @app.route("/register", methods=["GET"])
 def render_register():

@@ -9,6 +9,8 @@
 
 {% if session.user_username %}
     Terve {{ session.user_username }}
+    <br>
+    <a href="/logout"> Kirjaudu ulos</a>
 
 {% else %}
     Et ole kirjautunut sisään
