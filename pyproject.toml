@@ -10,6 +10,7 @@ python = "^3.8"
 flask = "^2.2.2"
 psycopg2 = "^2.9.5"
 flask-sqlalchemy = "^3.0.2"
+python-dotenv = "^0.21.0"
 
 
 [build-system]

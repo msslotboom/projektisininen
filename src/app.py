@@ -1,3 +1,4 @@
+from os import getenv
 from flask import (
     Flask,
     render_template,
@@ -10,7 +11,7 @@ from flask import (
 from services.user_services import user_service
 
 app = Flask(__name__)
-app.secret_key = "09215SXCwsad12512"
+app.secret_key = getenv("SECRET_KEY")
 
 def redirect_to_home():
     return redirect(url_for("render_home"))
