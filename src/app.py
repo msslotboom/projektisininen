@@ -37,6 +37,7 @@ def handle_login():
 
     try:
         user_service.validate_credentials(username, password)
+        user_service.login(username)
         return redirect_to_home()
     except Exception as error:
         flash(str(error))

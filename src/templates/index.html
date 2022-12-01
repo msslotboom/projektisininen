@@ -6,3 +6,11 @@
     <li><a href="/login">Kirjaudu sisään</a></li>
     <li><a href="/register">Rekisteröidy</a></li>
 </ul>
+
+{% if session.user_username %}
+    Terve {{ session.user_username }}
+
+{% else %}
+    Et ole kirjautunut sisään
+
+{% endif %}

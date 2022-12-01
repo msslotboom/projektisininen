@@ -1,5 +1,7 @@
 from entities.user import User
 from repositories.user_repository import user_repository
+from flask import session
+from secrets import token_hex
 
 class UserInputError(Exception):
     pass
@@ -35,5 +37,12 @@ class UserService:
     def validate_user(self, username, password, password_confirmation):
         if not username or not password:
             raise UserInputError("Käyttäjänimi ja salasana vaaditaan")
+    
+    def login(self, username):
+        user = self._user_repo.find_by_username(username)
+        session["user_username"] = user.username
+        session["user_id"] = user.id
+        session["csrf_token"] = token_hex(16)
+
 
 user_service = UserService()
