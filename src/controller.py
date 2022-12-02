@@ -77,8 +77,12 @@ def handle_new_citation():
     authors = request.form.get("authors")
     title = request.form.get("title")
     year = request.form.get("year")
-    citation_service.create_citation(owner_id, authors, title, int(year))
-    return redirect("/")
+    try:
+        citation_service.create_citation(owner_id, authors, title, int(year))
+    except Exception as error:
+        return render_template("error.html", message=error)
+
+    return redirect("/citations")
 
 
 @controller.route("/citations", methods=["GET"])

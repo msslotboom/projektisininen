@@ -11,7 +11,7 @@ class CitationService:
         self._citation_repo = citation_repo
 
     def validate_citation(self, authors, title, year):
-        if not authors or not title or not year:
+        if len(authors)<1 or len(title)<1 or not year:
             raise UserInputError("Viitteestä puuttuu tietoja")
 
     def create_citation(self, owner_id, authors, title, year):
