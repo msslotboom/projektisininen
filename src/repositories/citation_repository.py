@@ -10,17 +10,7 @@ class CitationRepository:
         return citation
 
     def get_all_citations(self, user_id):
-        return Citation.query.filer_by(owner_id=user_id)
+        return Citation.query.filter_by(owner_id=user_id)
 
-    def get_citations_from_db(self, owner_id):
-        sql = """SELECT * FROM citations WHERE owner_id=:id
-        """
-
-        result = db.session.execute(sql, {"id":owner_id})
-        citations = []
-        for row in result.fetchall():
-            citations.append(row)
-        self._citations = citations
-        return self._citations
 
 citation_repository = CitationRepository()

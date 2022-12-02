@@ -4,10 +4,10 @@
 
 {% for citation in citations %}
 <ul>
-<li>Kirjoittaja: {{ citation[2] }}</li>
-<li>Otsikko: {{ citation[3] }}</li>
-<li>Vuosi: {{ citation[4] }}</li>
+<li>Kirjoittajat: {{ citation[0] }}</li>
+<li>Otsikko: {{ citation[1] }}</li>
+<li>Vuosi: {{ citation[2] }}</li>
 </ul>
 {% endfor %}
 
-<a href="/login">Takaisin</a>
+<a href="/">Takaisin</a>

@@ -20,6 +20,10 @@ class CitationService:
         return self._citation_repo.create_new_citation(Citation(owner_id=owner_id, authors=authors, title=title, year=year))
 
     def get_citations(self, owner_id):
-        return self._citation_repo.get_citations_from_db(owner_id)
+        citations = []
+        for citation in self._citation_repo.get_all_citations(owner_id):
+            citations.append((citation.authors, citation.title, citation.year))
+        
+        return citations
 
 citation_service = CitationService()

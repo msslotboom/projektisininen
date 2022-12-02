@@ -91,10 +91,6 @@ def render_citations():
     #     print(error, file=sys.stdout)
     #     return redirect("/")
 
-    userid = user_service.get_session_user_id()
-    print(userid, file=sys.stderr)
-    citations = citation_service.get_citations(
-        str(userid)
-    )
-    print(citations, file=sys.stdout)
+    user_id = user_service.get_session_user_id()
+    citations = citation_service.get_citations(user_id)
     return render_template("citations.html", citations = citations)
