@@ -3,7 +3,6 @@
 
 ## Definition of Done
 - Hyväksymiskriteerit täyttyvät
-- Sopivasti yksikkötestejä
 - Sivu toimii tuotannossa (fly.io)
 - Asiakas on hyväksynyt
 
