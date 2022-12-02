@@ -1,0 +1,13 @@
+<title>Viitteet</title>
+
+<h1>Viitteet</h1>
+
+{% for citation in citations %}
+<ul>
+<li>Kirjoittaja: {{ citation[2] }}</li>
+<li>Otsikko: {{ citation[3] }}</li>
+<li>Vuosi: {{ citation[4] }}</li>
+</ul>
+{% endfor %}
+
+<a href="/login">Takaisin</a>

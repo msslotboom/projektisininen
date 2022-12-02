@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, flash
 from services.user_services import user_service
 from services.citation_services import citation_service
+import sys
 
 controller = Blueprint("controller", __name__)
 
@@ -78,3 +79,22 @@ def handle_new_citation():
     year = request.form.get("year")
     citation_service.create_citation(owner_id, authors, title, int(year))
     return redirect("/")
+
+@controller.route("/citations", methods=["GET"])
+def render_citations():
+    # try:
+    #     csrf_token = request.form["crsf_token"]
+    #     print(csrf_token, file=sys.stdout)
+    #     user_service.check_csrf(csrf_token)
+    # except Exception as error:
+    #     flash(str(error))
+    #     print(error, file=sys.stdout)
+    #     return redirect("/")
+
+    userid = user_service.get_session_user_id()
+    print(userid, file=sys.stderr)
+    citations = citation_service.get_citations(
+        str(userid)
+    )
+    print(citations, file=sys.stdout)
+    return render_template("citations.html", citations = citations)
