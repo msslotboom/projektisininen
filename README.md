@@ -9,4 +9,4 @@
 
 ---
 
-[Kokeile sovellusta](projektisininen.fly.dev)
+[Kokeile sovellusta](https://projektisininen.fly.dev)
