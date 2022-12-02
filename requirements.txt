@@ -71,6 +71,9 @@ greenlet==2.0.1 ; python_version >= "3.8" and (platform_machine == "aarch64" or 
     --hash=sha256:ea688d11707d30e212e0110a1aac7f7f3f542a259235d396f88be68b649e47d1 \
     --hash=sha256:f6327b6907b4cb72f650a5b7b1be23a2aab395017aa6f1adb13069d66360eb3f \
     --hash=sha256:fb412b7db83fe56847df9c47b6fe3f13911b06339c2aa02dcc09dce8bbf582cd
+gunicorn==20.1.0 ; python_version >= "3.8" and python_version < "4.0" \
+    --hash=sha256:9dcc4547dbb1cb284accfb15ab5667a0e5d1881cc443e0677b4882a4067a807e \
+    --hash=sha256:e0a968b5ba15f8a328fdfd7ab1fcb5af4470c28aaf7e55df02a99bc13138e6e8
 importlib-metadata==5.1.0 ; python_version >= "3.8" and python_version < "3.10" \
     --hash=sha256:d5059f9f1e8e41f80e9c56c2ee58811450c31984dfa625329ffd7c0dad88a73b \
     --hash=sha256:d84d17e21670ec07990e1044a99efe8d615d860fd176fc29ef5c306068fda313
@@ -196,6 +199,9 @@ psycopg2-binary==2.9.5 ; python_version >= "3.8" and python_version < "4.0" \
 python-dotenv==0.21.0 ; python_version >= "3.8" and python_version < "4.0" \
     --hash=sha256:1684eb44636dd462b66c3ee016599815514527ad99965de77f43e0944634a7e5 \
     --hash=sha256:b77d08274639e3d34145dfa6c7008e66df0f04b7be7a75fd0d5292c191d79045
+setuptools==65.6.3 ; python_version >= "3.8" and python_version < "4.0" \
+    --hash=sha256:57f6f22bde4e042978bcd50176fdb381d7c21a9efa4041202288d3737a0c6a54 \
+    --hash=sha256:a7620757bf984b58deaf32fc8a4577a9bbc0850cf92c20e1ce41c38c19e5fb75
 sqlalchemy==1.4.44 ; python_version >= "3.8" and python_version < "4.0" \
     --hash=sha256:0be9b479c5806cece01f1581726573a8d6515f8404e082c375b922c45cfc2a7b \
     --hash=sha256:17aee7bfcef7bf0dea92f10e5dfdd67418dcf6fe0759f520e168b605855c003e \
