@@ -80,17 +80,9 @@ def handle_new_citation():
     citation_service.create_citation(owner_id, authors, title, int(year))
     return redirect("/")
 
+
 @controller.route("/citations", methods=["GET"])
 def render_citations():
-    # try:
-    #     csrf_token = request.form["crsf_token"]
-    #     print(csrf_token, file=sys.stdout)
-    #     user_service.check_csrf(csrf_token)
-    # except Exception as error:
-    #     flash(str(error))
-    #     print(error, file=sys.stdout)
-    #     return redirect("/")
-
     user_id = user_service.get_session_user_id()
     citations = citation_service.get_citations(user_id)
-    return render_template("citations.html", citations = citations)
+    return render_template("citations.html", citations=citations)
