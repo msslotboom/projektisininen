@@ -6,3 +6,7 @@
 - Sopivasti yksikkötestejä
 - Sivu toimii tuotannossa (fly.io)
 - Asiakas on hyväksynyt
+
+---
+
+[Kokeile sovellusta](projektisininen.fly.dev)
