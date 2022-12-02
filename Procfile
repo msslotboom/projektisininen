@@ -1,2 +1,2 @@
 release: python src/initialize_database.py
-web: gunicorn --chdir src run:app
+web: gunicorn --chdir src start:app
