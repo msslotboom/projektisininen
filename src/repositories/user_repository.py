@@ -1,5 +1,5 @@
-from entities.user import User
-from db import db
+from models.user import User
+from app import db
 
 
 class UserRepository:
@@ -7,46 +7,27 @@ class UserRepository:
         self._users = []
 
     def find_all(self):
-        users = []
-        query = "SELECT username, password FROM users"
-        db.execute(query)
-        for row in db.fetchall():
-            users.append(User(row[0],row[1]))
-        self._users = users
-        return self._users
+        print(User.query.all())
+        return User.query.all()
 
     def find_by_username(self, username):
-        users = self.find_all()
+        user = User.query.filter_by(username=username).first()
+        return user
 
-        user_with_same_username = filter(
-            lambda u: u.username == username, users
-        )
-        user_with_same_username_list = list(user_with_same_username)
-
-        return user_with_same_username_list[0] if len(user_with_same_username_list) > 0 else None
-
-    def create_new_user(self, user):
-        users = self.find_all()
-        does_user_exist = self.find_by_username(user.username)
-
-        if does_user_exist:
+    def create_new_user(self, user: User):
+        if self.find_by_username(user.username) is not None:
             raise Exception(
                 f"Käyttäjänimi {user.username} on jo käytössä"
             )
-        
-        sql = "INSERT INTO users(id, username, password) VALUES (%s,%s,%s)"
-        id = len(users) + 1
-        insert = (id, user.username, user.password)
-        db.execute(sql,insert)
 
-        users.append(user)
-        self._users = users
+        db.session.add(user)
+        db.session.commit()
 
         return user
-    
+
     def get_id(self, username):
-        query = """SELECT id FROM users WHERE username=:username"""
-        id_value = db.execute(query, {"username":username}).fetchone()[0]
-        return id_value
+        user = User.query.filter_by(username=username).first()
+        return user.id
+
 
 user_repository = UserRepository()

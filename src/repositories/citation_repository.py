@@ -1,27 +1,19 @@
-from entities.citation import Citation
-from db import db 
+from app import db
+from models.citation import Citation
+
 
 class CitationRepository:
     def __init__(self):
         self._citations = []
 
     def create_new_citation(self, citation: Citation):
-        sql = """INSERT INTO citations(owner_id, authors, title, year)
-                VALUES (%s,%s,%s,%s)"""
-        insert = (citation.owner_id, citation.authors, 
-                    citation.title, citation.year)
-        db.execute(sql, insert)
+        db.session.add(citation)
+        db.session.commit()
 
-        self._citations.append()
+        return citation
 
     def get_all_citations(self, user_id):
-        sql = """SELECT * FROM citations WHERE owner_id=%s
-        """
-        db.execute(sql, user_id)
-        citations = []
-        for row in db.fetchall():
-            citations.append(row)
-        self._citations = citations
-        return self._citations
+        return Citation.query.filer_by(owner_id=user_id)
+
 
 citation_repository = CitationRepository()
