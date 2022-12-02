@@ -3,11 +3,7 @@ from app import db
 
 
 class UserRepository:
-    def __init__(self):
-        self._users = []
-
-    def find_all(self):
-        print(User.query.all())
+    def find_all_users(self):
         return User.query.all()
 
     def find_by_username(self, username):
@@ -28,6 +24,12 @@ class UserRepository:
     def get_id(self, username):
         user = User.query.filter_by(username=username).first()
         return user.id
+
+    def delete_all_users(self):
+        return_value = User.query.delete()
+        db.session.commit()
+
+        return return_value
 
 
 user_repository = UserRepository()

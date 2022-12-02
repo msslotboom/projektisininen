@@ -3,9 +3,6 @@ from models.citation import Citation
 
 
 class CitationRepository:
-    def __init__(self):
-        self._citations = []
-
     def create_new_citation(self, citation: Citation):
         db.session.add(citation)
         db.session.commit()
