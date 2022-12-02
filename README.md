@@ -3,8 +3,8 @@
 
 ## Definition of Done
 - Hyväksymiskriteerit täyttyvät
-- Sopivasti yksikkötestejä
 - Sivu toimii tuotannossa (fly.io)
+- Sopivasti yksikkötestejä
 - Asiakas on hyväksynyt
 
 ---
