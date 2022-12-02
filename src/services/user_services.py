@@ -14,7 +14,7 @@ class AuthenticationError(Exception):
 
 class UserService:
     def __init__(self, user_repo=user_repository):
-        self._user_repo = user_repository
+        self._user_repo = user_repo
 
     def validate_credentials(self, username, password):
         if not username or not password:
