@@ -1,9 +1,12 @@
 import unittest
 from repositories.user_repository import user_repository
+from repositories.citation_repository import citation_repository
 from models.user import User
+
 
 class TestUserRepository(unittest.TestCase):
     def setUp(self):
+        citation_repository.delete_all_citations()
         user_repository.delete_all_users()
 
     def test_create_new_user_with_valid_creditentials(self):
