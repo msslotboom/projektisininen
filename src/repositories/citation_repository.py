@@ -18,5 +18,10 @@ class CitationRepository:
         db.session.delete(citation_obj)
         db.session.commit()
 
+    def delete_all_citations(self):
+        return_value = Citation.query.delete()
+        db.session.commit()
+
+        return return_value
 
 citation_repository = CitationRepository()
