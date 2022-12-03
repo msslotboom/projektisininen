@@ -8,6 +8,11 @@
 <li>Otsikko: {{ citation[1] }}</li>
 <li>Vuosi: {{ citation[2] }}</li>
 </ul>
+<form action="/delete_citation" method="POST">
+    <input type="hidden" name="citation_id" value="{{ citation[3] }}">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <input type="submit" value="poista">
+</form>
 {% endfor %}
 
 <a href="/">Takaisin</a>

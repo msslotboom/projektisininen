@@ -11,6 +11,12 @@ class CitationRepository:
 
     def get_all_citations(self, user_id):
         return Citation.query.filter_by(owner_id=user_id)
+    
+    def delete_citation(self, citation_id):
+        citation_obj = Citation.query.filter_by(id=citation_id).one()
+
+        db.session.delete(citation_obj)
+        db.session.commit()
 
 
 citation_repository = CitationRepository()

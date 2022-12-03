@@ -22,8 +22,11 @@ class CitationService:
     def get_citations(self, owner_id):
         citations = []
         for citation in self._citation_repo.get_all_citations(owner_id):
-            citations.append((citation.authors, citation.title, citation.year))
+            citations.append((citation.authors, citation.title, citation.year, citation.id))
         
         return citations
+    
+    def delete_citation(self, citation_id):
+        self._citation_repo.delete_citation(citation_id)
 
 citation_service = CitationService()

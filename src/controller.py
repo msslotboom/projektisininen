@@ -90,3 +90,14 @@ def render_citations():
     user_id = user_service.get_session_user_id()
     citations = citation_service.get_citations(user_id)
     return render_template("citations.html", citations=citations)
+
+@controller.route("/delete_citation", methods=["POST"])
+def handle_delete_citation():
+    try:
+        csrf_token = request.form["csrf_token"]
+        user_service.check_csrf(csrf_token)
+        citation_id = request.form["citation_id"]
+        citation_service.delete_citation(citation_id)
+        return redirect("/citations")
+    except Exception as error:
+        return render_template("error.html", message=error)
