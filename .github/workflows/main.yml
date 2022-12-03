@@ -35,7 +35,7 @@ jobs:
       - name: Run unit tests
         run: poetry run pytest src
         env:
-          DATABASE_URL: postgresql://postgres@localhost/postgres
+          DATABASE_URL: postgresql://postgres:postgres@localhost/postgres
       
       
       
