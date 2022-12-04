@@ -1,6 +1,6 @@
 *** Keywords ***
 Registration Should Succeed
-    Login Page Should Be Open
+    Main Page Should Be Open
 
 Submit Registration Credentials
     Click Button  Rekisteröidy
