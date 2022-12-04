@@ -4,3 +4,7 @@ __pycache__
 htmlcov
 .env
 .env.test
+/report.html
+/log.html
+/output.xml
+selenium-screenshot*

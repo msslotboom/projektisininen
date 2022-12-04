@@ -45,6 +45,9 @@ class UserService:
         if len(password) < 3 or len(password) > 100:
             raise UserInputError("Huono salasana")
 
+    def delete_all_users(self):
+        return self._user_repo.delete_all_users()
+
     def login(self, username):
         session["user_username"] = username
         session["csrf_token"] = token_hex(16)

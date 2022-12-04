@@ -29,4 +29,7 @@ class CitationService:
     def delete_citation(self, citation_id):
         self._citation_repo.delete_citation(citation_id)
 
+    def delete_all_citations(self):
+        return self._citation_repo.delete_all_citations()
+
 citation_service = CitationService()

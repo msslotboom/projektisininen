@@ -1,8 +1,8 @@
-from os import getenv
 from flask import Flask
 from database import db
-from cfg import DATABASE_URL, SECRET_KEY
-from controller import controller
+from cfg import DATABASE_URL, SECRET_KEY, FLASK_DEBUG
+from controllers.main_controller import main_controller
+from controllers.test_controller import test_controller
 
 
 def create_app():
@@ -10,7 +10,11 @@ def create_app():
 
     app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URL
     app.config['SECRET_KEY'] = SECRET_KEY
-    app.register_blueprint(controller)
+
+    app.register_blueprint(main_controller)
+
+    if FLASK_DEBUG == "1":
+        app.register_blueprint(test_controller)
 
     db.init_app(app)
 

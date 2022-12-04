@@ -7,6 +7,7 @@ load_dotenv(dotenv_path=os.path.join(directory, "..", ".env"))
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 SECRET_KEY = os.getenv("SECRET_KEY")
+FLASK_DEBUG = os.getenv("FLASK_DEBUG")
 
 
 # Fly.io fix

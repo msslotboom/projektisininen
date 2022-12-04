@@ -1,22 +1,24 @@
 from flask import Blueprint, render_template, request, redirect, flash
+from repositories.user_repository import user_repository
+from repositories.citation_repository import citation_repository
 from services.user_services import user_service
 from services.citation_services import citation_service
 import sys
 
-controller = Blueprint("controller", __name__)
+main_controller = Blueprint("main_controller", __name__)
 
 
-@controller.route("/")
+@main_controller.route("/")
 def render_home():
     return render_template("index.html")
 
 
-@controller.route("/login", methods=["GET"])
+@main_controller.route("/login", methods=["GET"])
 def render_login():
     return render_template("login.html")
 
 
-@controller.route("/login", methods=["POST"])
+@main_controller.route("/login", methods=["POST"])
 def handle_login():
     username = request.form.get("username")
     password = request.form.get("password")
@@ -30,18 +32,18 @@ def handle_login():
         return redirect("/register")
 
 
-@controller.route("/logout")
+@main_controller.route("/logout")
 def handle_logout():
     user_service.logout()
     return redirect("/")
 
 
-@controller.route("/register", methods=["GET"])
+@main_controller.route("/register", methods=["GET"])
 def render_register():
     return render_template("register.html")
 
 
-@controller.route("/register", methods=["POST"])
+@main_controller.route("/register", methods=["POST"])
 def handle_register():
     username = request.form.get("username")
     password = request.form.get("password")
@@ -51,16 +53,17 @@ def handle_register():
         user_service.create_user(username, password, password_confirm)
         return redirect("/login")
     except Exception as error:
+        print(error)
         flash(str(error))
         return redirect("/register")
 
 
-@controller.route("/new_citation", methods=["GET"])
+@main_controller.route("/new_citation", methods=["GET"])
 def render_new_citation():
     return render_template("new_citation.html")
 
 
-@controller.route("/new_citation", methods=["POST"])
+@main_controller.route("/new_citation", methods=["POST"])
 def handle_new_citation():
 
     try:
@@ -85,13 +88,13 @@ def handle_new_citation():
     return redirect("/citations")
 
 
-@controller.route("/citations", methods=["GET"])
+@main_controller.route("/citations", methods=["GET"])
 def render_citations():
     user_id = user_service.get_session_user_id()
     citations = citation_service.get_citations(user_id)
     return render_template("citations.html", citations=citations)
 
-@controller.route("/delete_citation", methods=["POST"])
+@main_controller.route("/delete_citation", methods=["POST"])
 def handle_delete_citation():
     try:
         csrf_token = request.form["csrf_token"]
