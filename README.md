@@ -1,13 +1,17 @@
+![actions_badge](https://github.com/msslotboom/projektisininen/workflows/build/badge.svg)  
+  
 [Product ja sprint backlogit](https://docs.google.com/spreadsheets/d/190t4pxaOxAFbWoXax1XO7td4qyt_bBqrh0JbS_d_AtI)  
 [Linkki sovellukseen](https://projektisininen.fly.dev)  
 
+## Backlogit
+[Product ja sprint backlogit](https://docs.google.com/spreadsheets/d/190t4pxaOxAFbWoXax1XO7td4qyt_bBqrh0JbS_d_AtI)
+>>>>>>> b1ad2d80bbe6825acd8d581c11aa3d5c5ad8ca83
 
 ## Definition of Done
 - Hyväksymiskriteerit täyttyvät
 - Sivu toimii tuotannossa (fly.io)
 - Sopivasti yksikkötestejä
 - Asiakas on hyväksynyt
-
 
 ## Ohjeita kehittäjille
 
