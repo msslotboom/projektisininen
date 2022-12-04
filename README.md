@@ -1,10 +1,9 @@
 ![actions_badge](https://github.com/msslotboom/projektisininen/workflows/build/badge.svg)  
-  
-[Product ja sprint backlogit](https://docs.google.com/spreadsheets/d/190t4pxaOxAFbWoXax1XO7td4qyt_bBqrh0JbS_d_AtI)  
-[Linkki sovellukseen](https://projektisininen.fly.dev)  
 
+[Linkki sovellukseen](https://projektisininen.fly.dev)  
+  
 ## Backlogit
-[Product ja sprint backlogit](https://docs.google.com/spreadsheets/d/190t4pxaOxAFbWoXax1XO7td4qyt_bBqrh0JbS_d_AtI)
+[Product ja sprint backlogit](https://docs.google.com/spreadsheets/d/190t4pxaOxAFbWoXax1XO7td4qyt_bBqrh0JbS_d_AtI)  
 
 ## Definition of Done
 - Hyväksymiskriteerit täyttyvät
