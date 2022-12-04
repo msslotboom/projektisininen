@@ -13,3 +13,7 @@ def reset():
     citation_service.delete_all_citations()
 
     return "reset"
+
+@test_controller.route("/ping")
+def ping():
+    return "pong"
