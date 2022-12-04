@@ -23,5 +23,10 @@ class CitationRepository:
         db.session.commit()
 
         return return_value
+    
+    def get_citation(self, citation_id):
+        return Citation.query.filter_by(id=citation_id).first()
+
+
 
 citation_repository = CitationRepository()

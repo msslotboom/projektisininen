@@ -13,6 +13,10 @@
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="submit" value="poista">
 </form>
+<form action="/edit_citation" method="GET" target="_blank">
+    <input type="hidden" name="citation_id" value="{{ citation[3] }}">
+    <input type="submit" value="muokkaa">
+</form>
 {% endfor %}
 
 <a href="/">Takaisin</a>

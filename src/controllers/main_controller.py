@@ -51,7 +51,8 @@ def handle_register():
 
     try:
         user_service.create_user(username, password, password_confirm)
-        return redirect("/login")
+        user_service.login(username)
+        return redirect("/")
     except Exception as error:
         print(error)
         flash(str(error))
@@ -102,5 +103,22 @@ def handle_delete_citation():
         citation_id = request.form["citation_id"]
         citation_service.delete_citation(citation_id)
         return redirect("/citations")
+    except Exception as error:
+        return render_template("error.html", message=error)
+    
+@main_controller.route("/edit_citation", methods=["GET"])
+def render_edit_citation():
+    try:
+        citation_id = request.args.get("citation_id")
+        print(citation_id)
+        citation = citation_service.get_content_by_id(citation_id)
+        return render_template("edit_citation.html", citation=citation)
+    except Exception as error:
+        return render_template("error.html", message=error)
+
+@main_controller.route("/edit_citation", methods=["POST"])
+def handle_edit_citation():
+    try:
+        pass
     except Exception as error:
         return render_template("error.html", message=error)

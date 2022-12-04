@@ -1,0 +1,30 @@
+<title>Muokkaa viitettä</title>
+
+<h1>Muokkaa Viitettä</h1>
+
+<form action="/edit_citation" method="post">
+
+    <div>
+        <label for="authors">Kirjottaja(t)</label> <br>
+        <textarea name="authors" rows="0" cols="50" placeholder="Nimi">{{ citation.authors }}
+        </textarea>
+    </div>
+
+    <div>
+        <label for="title">Otsikko</label> <br>
+        <textarea name="title" rows="0" cols="50" placeholder="Otsikko">{{ citation.title }}
+        </textarea>
+    </div>
+
+    <div>
+        <label for="year">Vuosi</label> <br>
+        <input type="text" name="year" placeholder="Vuosi" value="{{ citation.year }}"/>
+    </div>
+
+    <button>
+        Muokkaa!
+    </button>
+
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+
+</form>
