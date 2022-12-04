@@ -10,15 +10,14 @@ class TestCitationRepository(unittest.TestCase):
         citation_repository.delete_all_citations()
         user_repository.delete_all_users()
         user_repository.create_new_user(User(username="Jaakko", password="salasana1"))
-        
-    #HUOM Poistettavan viitteen ID on eri vaikka edellinen poistettu!
-    
+
+
     def test_delete_citaton(self):
         omistaja_id = 1
-        citation_repository.create_new_citation(Citation(
+        poistettava = citation_repository.create_new_citation(Citation(
             owner_id=omistaja_id, authors="Einstein", title="kirja", year=1905))  
 
-        Einstein_id = 1
+        Einstein_id = poistettava.id
         citation_repository.delete_citation(Einstein_id)
 
         citations = citation_repository.get_all_citations(omistaja_id).count()
@@ -26,10 +25,10 @@ class TestCitationRepository(unittest.TestCase):
 
     def test_delete_citaton_a_second_time(self):
         omistaja_id = 1
-        citation_repository.create_new_citation(Citation(
+        poistettava = citation_repository.create_new_citation(Citation(
             owner_id=omistaja_id, authors="Einstein", title="kirja", year=1905))  
 
-        Einstein_id = 2
+        Einstein_id = poistettava.id
         citation_repository.delete_citation(Einstein_id)
 
         citations = citation_repository.get_all_citations(omistaja_id).count()
@@ -37,13 +36,24 @@ class TestCitationRepository(unittest.TestCase):
     
     def test_delete_one_citaton_of_two(self):
         omistaja_id = 1
-        citation_repository.create_new_citation(Citation(owner_id=omistaja_id, 
+        poistettava = citation_repository.create_new_citation(Citation(owner_id=omistaja_id, 
         authors="Einstein", title="kirja", year=1905))  
         citation_repository.create_new_citation(Citation(owner_id=omistaja_id, 
         authors="Hawking", title="parempi kirja", year=2002))  
 
-        Einstein_id = 3
+        Einstein_id = poistettava.id
         citation_repository.delete_citation(Einstein_id)
 
         citations = citation_repository.get_all_citations(omistaja_id).count()
         self.assertEqual(citations, 1)
+
+    def test_edit_citation(self):
+        omistaja_id = 1
+        viite = citation_repository.create_new_citation(Citation(owner_id=omistaja_id, 
+        authors="Einstein", title="kirja", year=1905))  
+        
+        viite_id = viite.id
+        u_viite = citation_repository.edit_citation(viite_id, "Hawking", "parempi kirja", 2002)
+        self.assertEqual(u_viite.authors, "Hawking")
+        self.assertEqual(u_viite.title, "parempi kirja")
+        self.assertEqual(u_viite.year, 2002)

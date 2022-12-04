@@ -69,24 +69,16 @@ def handle_new_citation():
 
     try:
         csrf_token = request.form["csrf_token"]
-        print(csrf_token)
         user_service.check_csrf(csrf_token)
-
-    except Exception as error:
-        flash(str(error))
-        print(error)
-        return redirect("/")
-
-    owner_id = user_service.get_session_user_id()
-    authors = request.form.get("authors")
-    title = request.form.get("title")
-    year = request.form.get("year")
-    try:
+        owner_id = user_service.get_session_user_id()
+        authors = request.form.get("authors")
+        title = request.form.get("title")
+        year = request.form.get("year")
         citation_service.create_citation(owner_id, authors, title, int(year))
+        return redirect("/citations")
     except Exception as error:
         return render_template("error.html", message=error)
 
-    return redirect("/citations")
 
 
 @main_controller.route("/citations", methods=["GET"])
@@ -119,6 +111,13 @@ def render_edit_citation():
 @main_controller.route("/edit_citation", methods=["POST"])
 def handle_edit_citation():
     try:
-        pass
+        csrf_token = request.form["csrf_token"]
+        user_service.check_csrf(csrf_token)
+        citation_id = request.form.get("citation_id")
+        authors = request.form.get("authors")
+        title = request.form.get("title")
+        year = request.form.get("year")
+        citation_service.edit_citation(citation_id, authors, title, int(year))
+        return redirect("/citations")
     except Exception as error:
         return render_template("error.html", message=error)

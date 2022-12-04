@@ -13,11 +13,18 @@ class CitationService:
     def validate_citation(self, authors, title, year):
         if len(authors)<1 or len(title)<1 or not year:
             raise UserInputError("Viitteestä puuttuu tietoja")
+        elif len(authors) > 1000 or len(title) > 1000 or year > 2030:
+            raise UserInputError("Viite on virheellinen")
 
     def create_citation(self, owner_id, authors, title, year):
         self.validate_citation(authors, title, year)
 
         return self._citation_repo.create_new_citation(Citation(owner_id=owner_id, authors=authors, title=title, year=year))
+    
+    def edit_citation(self, citation_id, authors, title, year):
+        self.validate_citation(authors, title, year)
+        self._citation_repo.edit_citation(citation_id, authors, title, year)
+
 
     def get_citations(self, owner_id):
         citations = []
