@@ -25,7 +25,6 @@ class CitationService:
         self.validate_citation(authors, title, year)
         self._citation_repo.edit_citation(citation_id, authors, title, year)
 
-
     def get_citations(self, owner_id):
         citations = []
         for citation in self._citation_repo.get_all_citations(owner_id):

@@ -102,7 +102,6 @@ def handle_delete_citation():
 def render_edit_citation():
     try:
         citation_id = request.args.get("citation_id")
-        print(citation_id)
         citation = citation_service.get_content_by_id(citation_id)
         return render_template("edit_citation.html", citation=citation)
     except Exception as error:
