@@ -6,12 +6,8 @@ Suite Teardown  Close Browser
 Test Setup  Create User And Login
 
 
-*** Variables ***
-${DOWNLOAD_DIR}         ${CURDIR}
-
 *** Test Cases ***
 Download Bibliography Of References
     Go To References Page
     Click Link  Lataa
-    Sleep  5s
     File Should Exist  templates/download.html
