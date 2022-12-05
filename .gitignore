@@ -4,11 +4,8 @@ __pycache__
 htmlcov
 .env
 .env.test
-/report.html
-/log.html
-/output.xml
+**/log.html
+**/output.xml
+**/report.html
 selenium-screenshot*
 /src/templates/download.html
-/src/log.html
-/src/output.xml
-/src/report.html
