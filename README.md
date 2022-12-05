@@ -9,6 +9,7 @@
 - Hyväksymiskriteerit täyttyvät
 - Sivu toimii tuotannossa (fly.io)
 - Sopivasti yksikkötestejä
+- Sopivasti end-to-end -testejä
 - Asiakas on hyväksynyt
 
 ## Ohjeita kehittäjille
