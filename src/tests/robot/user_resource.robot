@@ -1,6 +1,17 @@
 *** Keywords ***
+
+# Checks and validations
+
 Registration Should Succeed
     Main Page Should Be Open
+
+Registration Should Fail With Message
+    [Arguments]  ${message}
+    Registration Page Should Be Open
+    Page Should Contain  ${message}
+
+
+# Actions
 
 Submit Registration Credentials
     Click Button  Rekisteröidy
@@ -17,8 +28,8 @@ Set Password Confirmation
     [Arguments]  ${password_confirmation}
     Input Password  password_confirm  ${password_confirmation}
 
-Create User And Go To Register Page
-    Create User  Jaakko  salasana1
+Reset Application And Go To Register Page
+    Reset Application
     Go To Registration Page
     Registration Page Should Be Open
 

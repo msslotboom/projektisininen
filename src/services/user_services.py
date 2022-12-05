@@ -29,14 +29,22 @@ class UserService:
         if not username or not password:
             raise UserInputError("Käyttäjänimi ja salasana vaaditaan")
 
-        if len(username) < 3 or len(username) > 20:
-            raise UserInputError("Käyttäjänimi ei sallittu")
+        if len(username) < 3:
+            raise UserInputError("Käyttäjänimi on liian lyhyt")
+
+        if len(username) > 20:
+            raise UserInputError("Käyttäjänimi on liian pitkä")
+
+        if len(password) < 3:
+            raise UserInputError("Salasana on liian lyhyt")
+
+        if len(password) > 100:
+            raise UserInputError("Salasana on liian pitkä")
 
         if password != password_confirmation:
             raise UserInputError("Salasanat eivät täsmää")
 
-        if len(password) < 3 or len(password) > 100:
-            raise UserInputError("Huono salasana")
+        
 
     def validate_login_credentials(self, username, password):
         if not username or not password:
