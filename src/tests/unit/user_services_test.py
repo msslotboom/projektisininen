@@ -1,9 +1,6 @@
 import unittest
-from unittest.mock import Mock, ANY
+from unittest.mock import Mock
 from services.user_services import UserService, UserInputError
-from models.user import User
-
-
 
 
 class TestUserService(unittest.TestCase):
@@ -19,13 +16,7 @@ class TestUserService(unittest.TestCase):
 
         self.user_repository_mock.assert_not_called()
 
-
     def test_create_user_with_valid_creditentials(self):
         self.user_service.create_user("Jaakko", "salasana1", "salasana1")
 
         self.user_repository_mock.create_new_user.assert_called()
-
-
-
-
-
