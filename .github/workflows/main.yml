@@ -49,3 +49,4 @@ jobs:
         env: 
           DATABASE_URL: postgresql://postgres:postgres@localhost/postgres
           FLASK_DEBUG: 1
+          secret_key: SECRET_KEY
