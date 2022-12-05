@@ -49,4 +49,4 @@ jobs:
         env: 
           DATABASE_URL: postgresql://postgres:postgres@localhost/postgres
           FLASK_DEBUG: 1
-          secret_key: ${{ secrets.SECRET_KEY }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
