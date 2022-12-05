@@ -1,0 +1,4 @@
+[run]
+source = src
+branch = True
+omit = src/start.py,src/app.py,src/cfg.py,src/database.py,src/initialize_db.py,src/**/__init__.py,src/tests/**,src/controllers/**,src/models/**
