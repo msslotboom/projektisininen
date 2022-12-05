@@ -8,3 +8,4 @@ htmlcov
 /log.html
 /output.xml
 selenium-screenshot*
+/src/templates/download.html

@@ -3,6 +3,7 @@ from repositories.user_repository import user_repository
 from repositories.citation_repository import citation_repository
 from services.user_services import user_service
 from services.citation_services import citation_service
+from services.bibgen import bibliography_generator
 import sys
 
 main_controller = Blueprint("main_controller", __name__)
@@ -120,3 +121,9 @@ def handle_edit_citation():
         return redirect("/citations")
     except Exception as error:
         return render_template("error.html", message=error)
+
+@main_controller.route("/download", methods=["GET"])
+def handle_download():
+    user_id = user_service.get_session_user_id()
+    bibliography_generator.generate_bib_file(user_id)
+    return render_template("download.html")

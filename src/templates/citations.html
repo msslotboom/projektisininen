@@ -17,6 +17,16 @@
     <input type="hidden" name="citation_id" value="{{ citation[3] }}">
     <input type="submit" value="muokkaa">
 </form>
+<br>
+<form action="/delete_citation" method="POST">
+    <input type="hidden" name="citation_id" value="{{ citation[3] }}">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <input type="submit" value="poista">
+</form>
+
+
 {% endfor %}
+
+<a href="/download" download="bibliography.bib">Lataa</a>
 
 <a href="/">Takaisin</a>
