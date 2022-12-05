@@ -25,7 +25,7 @@ def handle_login():
     password = request.form.get("password")
 
     try:
-        user_service.validate_credentials(username, password)
+        user_service.validate_login_credentials(username, password)
         user_service.login(username)
         return redirect("/")
     except Exception as error:
