@@ -108,7 +108,8 @@ def render_edit_citation():
         citation = citation_service.get_content_by_id(citation_id)
         return render_template("edit_citation.html", citation=citation)
     except Exception as error:
-        return render_template("error.html", message=error)
+        flash(str(error))
+        return redirect("/edit_citation")
 
 @main_controller.route("/edit_citation", methods=["POST"])
 def handle_edit_citation():
