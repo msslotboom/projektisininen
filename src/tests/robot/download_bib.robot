@@ -13,4 +13,5 @@ ${DOWNLOAD_DIR}         ${CURDIR}
 Download Bibliography Of References
     Go To References Page
     Click Link  Lataa
+    Sleep  5s
     File Should Exist  templates/download.html
