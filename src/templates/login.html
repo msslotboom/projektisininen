@@ -3,19 +3,23 @@
 <h1>Kirjaudu sisään</h1>
 
 <form action="/login" method="post">
+  {% with messages = get_flashed_messages() %} {% if messages %}
+  <ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %} {% endwith %}
 
-    <div>
-        <label for="username">Käyttäjänimi</label>
-        <input type="text" name="username" id="username" />
-    </div>
+  <div>
+    <label for="username">Käyttäjänimi</label>
+    <input type="text" name="username" id="username" />
+  </div>
 
-    <div>
-        <label for="password">Salasana</label>
-        <input type="password" name="password" id="password" />
-    </div>
+  <div>
+    <label for="password">Salasana</label>
+    <input type="password" name="password" id="password" />
+  </div>
 
-    <button>
-        Kirjaudu sisään
-    </button>
-
+  <button>Kirjaudu sisään</button>
 </form>

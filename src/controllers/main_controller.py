@@ -30,7 +30,7 @@ def handle_login():
         return redirect("/")
     except Exception as error:
         flash(str(error))
-        return redirect("/register")
+        return redirect("/login")
 
 
 @main_controller.route("/logout")
@@ -55,7 +55,6 @@ def handle_register():
         user_service.login(username)
         return redirect("/")
     except Exception as error:
-        print(error)
         flash(str(error))
         return redirect("/register")
 
@@ -78,7 +77,8 @@ def handle_new_citation():
         citation_service.create_citation(owner_id, authors, title, int(year))
         return redirect("/citations")
     except Exception as error:
-        return render_template("error.html", message=error)
+        flash(str(error))
+        return redirect("/new_citation")
 
 
 
@@ -97,8 +97,10 @@ def handle_delete_citation():
         citation_service.delete_citation(citation_id)
         return redirect("/citations")
     except Exception as error:
-        return render_template("error.html", message=error)
-    
+        flash(str(error))
+        return redirect("/delete_citation")
+
+
 @main_controller.route("/edit_citation", methods=["GET"])
 def render_edit_citation():
     try:
@@ -120,7 +122,8 @@ def handle_edit_citation():
         citation_service.edit_citation(citation_id, authors, title, int(year))
         return redirect("/citations")
     except Exception as error:
-        return render_template("error.html", message=error)
+        flash(str(error))
+        return redirect("/edit_citation")
 
 @main_controller.route("/download", methods=["GET"])
 def handle_download():
