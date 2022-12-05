@@ -21,3 +21,11 @@ Create User And Go To Register Page
     Create User  Jaakko  salasana1
     Go To Registration Page
     Registration Page Should Be Open
+
+Create User And Login
+    Create User  Paavo2  salasana1
+    Go To Login Page
+    Set Username  Paavo2
+    Set Password  salasana1
+    Click Button  Kirjaudu sisään
+    Main Page Should Be Open

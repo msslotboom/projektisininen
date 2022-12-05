@@ -1,6 +1,7 @@
 *** Settings ***
 Library  SeleniumLibrary
 Library  AppLibrary.py
+Library  OperatingSystem
 
 *** Variables ***
 ${SERVER}  localhost:5000
@@ -9,6 +10,7 @@ ${DELAY}  0 seconds
 ${HOME URL}  http://${SERVER}/
 ${LOGIN URL}  http://${SERVER}/login
 ${REGISTER URL}  http://${SERVER}/register
+${REFERENCES URL}  http://${SERVER}/citations
 
 *** Keywords ***
 Open And Configure Browser
@@ -21,6 +23,9 @@ Go To Login Page
 
 Go To Registration Page
     Go To  ${REGISTER URL}
+
+Go To References Page
+    Go To  ${References URL}
 
 Main Page Should Be Open
     Location Should Be  ${HOME URL}
