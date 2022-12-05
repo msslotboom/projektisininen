@@ -10,4 +10,5 @@ Test Setup  Create User And Login
 Download Bibliography Of References
     Go To References Page
     Click Link  Lataa
+    Sleep  10s
     File Should Exist  templates/download.html

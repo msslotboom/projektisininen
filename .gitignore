@@ -9,3 +9,6 @@ htmlcov
 /output.xml
 selenium-screenshot*
 /src/templates/download.html
+/src/log.html
+/src/output.xml
+/src/report.html
