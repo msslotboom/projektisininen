@@ -44,8 +44,6 @@ class UserService:
         if password != password_confirmation:
             raise UserInputError("Salasanat eivät täsmää")
 
-        
-
     def validate_login_credentials(self, username, password):
         if not username or not password:
             raise UserInputError("Käyttäjänimi ja salasana vaaditaan")
