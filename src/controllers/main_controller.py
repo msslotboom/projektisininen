@@ -1,10 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, flash
-from repositories.user_repository import user_repository
-from repositories.citation_repository import citation_repository
 from services.user_services import user_service
 from services.citation_services import citation_service
 from services.bibgen import bibliography_generator
-import sys
 
 main_controller = Blueprint("main_controller", __name__)
 
