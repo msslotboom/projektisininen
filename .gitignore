@@ -9,3 +9,6 @@ output.xml
 report.html
 selenium-screenshot*
 /src/templates/download.html
+
+# todo: headless chromella lokaalisti ajetut robot-testit tallentavat tämän src-hakemistoon, tämä siihen asti kunnes asia korjattu
+bibliography.bib
