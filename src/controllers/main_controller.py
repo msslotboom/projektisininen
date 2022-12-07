@@ -131,5 +131,6 @@ def handle_edit_citation():
 @main_controller.route("/download", methods=["GET"])
 def handle_download():
     user_id = user_service.get_session_user_id()
-    bibliography_generator.generate_bib_file(user_id)
+    bibliography_as_text = bibliography_generator.generate_bib_text(user_id)
+    bibliography_generator.generate_bib_file(bibliography_as_text)
     return render_template("download.html")

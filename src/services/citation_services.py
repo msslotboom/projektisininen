@@ -40,6 +40,13 @@ class CitationService:
             citations.append((citation.authors, citation.title, citation.year, citation.given_id, citation.id))
         
         return citations
+
+    def get_citations_column_names(self):
+        column_names = []
+        for name in self._citation_repo.get_all_citation_table_names():
+            column_names.append(name)
+        
+        return column_names
     
     def get_content_by_id(self, citation_id):
         return self._citation_repo.get_citation(citation_id)

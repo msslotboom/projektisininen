@@ -24,6 +24,9 @@ class CitationRepository:
     def get_all_citations(self, user_id):
         return Citation.query.filter_by(owner_id=user_id)
     
+    def get_all_citation_table_names(self):
+        return Citation.__table__.columns.keys()
+    
     def delete_citation(self, citation_id):
         citation_obj = Citation.query.filter_by(id=citation_id).one()
 
