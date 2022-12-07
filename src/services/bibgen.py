@@ -11,19 +11,20 @@ class Bibgen:
         citation_columns = self._citations.get_citations_column_names()
         converted_columns = self.convert_to_bib_variables(citation_columns)
         citation_list = self._citations.get_citations(owner_id)
+        reordered_citation_list = self.reorder_citation_list_for_bib(citation_list)
         bib_as_text = ''
-        for item in range(len(citation_list)):
+
+        for item in range(len(reordered_citation_list)):
             for column in range(len(converted_columns)):
                 if column == 0:
-                    bib_as_text += "@----{" + f'{citation_list[item][column]},\n'
+                    bib_as_text += "@----{" + f'{reordered_citation_list[item][column]},\n'
                 elif column + 1 == len(converted_columns):
-                    bib_as_text += f'{converted_columns[column]} = ' + "{" + f'{citation_list[item][column]}' + "}\n}"
+                    bib_as_text += f'{converted_columns[column]} = ' + "{" + f'{reordered_citation_list[item][column]}' + "}\n}"
                 else:
-                    bib_as_text += f'{converted_columns[column]} = ' + "{" + f'{citation_list[item][column]}' + "},\n"
+                    bib_as_text += f'{converted_columns[column]} = ' + "{" + f'{reordered_citation_list[item][column]}' + "},\n"
 
             bib_as_text += '\n'
                 
-
         return bib_as_text
                 
     def generate_bib_file(self, text):
@@ -45,8 +46,19 @@ class Bibgen:
 
         return converted_columns
 
-
+    def reorder_citation_list_for_bib(self, list):
+        reordered_list = []
+        for sub_list in range(len(list)):
+            temporary_list = []
+            for item in range(len(list[sub_list])):
+                if item + 2 == len(list[sub_list]):
+                    temporary_list.insert(0, list[sub_list][item])
+                else:
+                    temporary_list.append(list[sub_list][item])
+            reordered_list.append(temporary_list)
         
+        return reordered_list
+
 
 
 bibliography_generator = Bibgen()
