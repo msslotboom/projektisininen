@@ -39,6 +39,10 @@ class CitationRepository:
     def get_citation(self, citation_id):
         return Citation.query.filter_by(id=citation_id).first()
 
+    def find_by_given_id(self, given_id):
+        id = Citation.query.filter_by(given_id=given_id).first()
+        return id
+
 
 
 citation_repository = CitationRepository()

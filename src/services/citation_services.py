@@ -14,7 +14,16 @@ class CitationService:
         if len(authors)<1 or len(title)<1 or not year or not given_id:
             raise UserInputError("Viitteestä puuttuu tietoja")
         elif len(authors) > 1000 or len(title) > 1000 or year > 2030:
-            raise UserInputError("Viite on virheellinen")    
+            raise UserInputError("Viite on virheellinen")
+        elif self.check_duplicate_given_id(given_id):
+            raise UserInputError("Annettu ID on jo käytössä")
+
+    def check_duplicate_given_id(self, given_id):
+        id = self._citation_repo.find_by_given_id(given_id)
+        if (id is not None):
+            return True
+        else:
+            return False
 
     def create_citation(self, owner_id, authors, title, year, given_id):
         self.validate_citation(authors, title, year, given_id)
