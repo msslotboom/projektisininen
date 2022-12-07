@@ -7,6 +7,7 @@
 <li>Kirjoittajat: {{ citation[0] }}</li>
 <li>Otsikko: {{ citation[1] }}</li>
 <li>Vuosi: {{ citation[2] }}</li>
+<li>ID: {{ citation[3] }}</li>
 </ul>
 <form action="/delete_citation" method="POST">
     <input type="hidden" name="citation_id" value="{{ citation[3] }}">

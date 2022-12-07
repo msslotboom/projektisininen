@@ -20,7 +20,8 @@ def create_tables():
             owner_id INTEGER REFERENCES users,
             authors TEXT,
             title TEXT,
-            year INTEGER
+            year INTEGER,
+            given_id INTEGER
         );
     """)
     db.session.commit()

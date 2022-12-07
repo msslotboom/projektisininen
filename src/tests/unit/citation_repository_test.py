@@ -50,10 +50,11 @@ class TestCitationRepository(unittest.TestCase):
     def test_edit_citation(self):
         omistaja_id = 1
         viite = citation_repository.create_new_citation(Citation(owner_id=omistaja_id, 
-        authors="Einstein", title="kirja", year=1905))  
+        authors="Einstein", title="kirja", year=1905, given_id = 1))  
         
         viite_id = viite.id
-        u_viite = citation_repository.edit_citation(viite_id, "Hawking", "parempi kirja", 2002)
+        u_viite = citation_repository.edit_citation(viite_id, "Hawking", "parempi kirja", 2002, 2)
         self.assertEqual(u_viite.authors, "Hawking")
         self.assertEqual(u_viite.title, "parempi kirja")
         self.assertEqual(u_viite.year, 2002)
+        self.assertEqual(u_viite.given_id, 2)

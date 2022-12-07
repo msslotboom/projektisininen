@@ -37,6 +37,16 @@
     />
   </div>
 
+  <div>
+    <label for="given_id">ID</label> <br />
+    <input
+      type="text"
+      name="given_id"
+      placeholder="ID"
+      value="{{ citation.given_id }}"
+    />
+  </div>  
+
   <button>Muokkaa!</button>
 
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />

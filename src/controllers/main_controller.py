@@ -74,7 +74,8 @@ def handle_new_citation():
         authors = request.form.get("authors")
         title = request.form.get("title")
         year = request.form.get("year")
-        citation_service.create_citation(owner_id, authors, title, int(year))
+        given_id = request.form.get("given_id")
+        citation_service.create_citation(owner_id, authors, title, int(year), int(given_id))
         return redirect("/citations")
     except Exception as error:
         flash(str(error))
@@ -120,7 +121,8 @@ def handle_edit_citation():
         authors = request.form.get("authors")
         title = request.form.get("title")
         year = request.form.get("year")
-        citation_service.edit_citation(citation_id, authors, title, int(year))
+        given_id = request.form.get("given_id")
+        citation_service.edit_citation(citation_id, authors, title, int(year), int(given_id))
         return redirect("/citations")
     except Exception as error:
         flash(str(error))

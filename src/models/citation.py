@@ -8,3 +8,4 @@ class Citation(db.Model):
     authors = db.Column(db.Text)
     title = db.Column(db.String)
     year = db.Column(db.Integer)
+    given_id = db.Column(db.Integer)

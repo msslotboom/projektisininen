@@ -9,13 +9,15 @@ class CitationRepository:
 
         return citation
     
-    def edit_citation(self, citation_id, authors, title, year):
+    def edit_citation(self, citation_id, authors, title, year, given_id):
         Citation.query.filter_by(id=citation_id).\
             update({'authors':authors})
         Citation.query.filter_by(id=citation_id).\
             update({'title':title})
         Citation.query.filter_by(id=citation_id).\
             update({'year':year})
+        Citation.query.filter_by(id=citation_id).\
+            update({'given_id':given_id})
         db.session.commit()
         return self.get_citation(citation_id)
 
