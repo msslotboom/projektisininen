@@ -75,6 +75,13 @@ def handle_new_citation():
         title = request.form.get("title")
         year = request.form.get("year")
         given_id = request.form.get("given_id")
+        if (year == ""): #Antaa muuten virheellisen error messagen, citation_servicen validointi kohdassa or not year ei toimi
+            year = 2031
+        if (given_id == ""): #Jos ID kohta jätetty tyhjäksi, etsitään sopiva ID automaattisesti
+            for i in range(1, 10000):
+                if not citation_service.check_duplicate_given_id(i):
+                    given_id = i
+                    break
         citation_service.create_citation(owner_id, authors, title, int(year), int(given_id))
         return redirect("/citations")
     except Exception as error:
