@@ -18,7 +18,7 @@ def create_tables():
         CREATE TABLE citations (
             id SERIAL PRIMARY KEY,
             owner_id INTEGER REFERENCES users,
-            given_id INTEGER,
+            given_id TEXT,
             type TEXT
         );
     """)
