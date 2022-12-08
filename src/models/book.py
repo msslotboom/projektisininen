@@ -6,6 +6,7 @@ class Book(db.Model):
     owner_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     given_id = db.Column(db.Integer)
     author = db.Column(db.Text)
+    editor = db.Column(db.Text)
     title = db.Column(db.Text)
-    journal = db.Column(db.Text)
+    publisher = db.Column(db.Text)
     type = db.Column(db.String)
