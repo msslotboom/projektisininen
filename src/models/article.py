@@ -8,5 +8,4 @@ class Article(db.Model):
     author = db.Column(db.Text)
     title = db.Column(db.Text)
     journal = db.Column(db.Text)
-    type = db.Column(db.String)
     year = db.Column(db.Integer)

@@ -3,7 +3,7 @@ from models.citation import Citation
 from models.book import Book
 from models.article import Article
 from models.othercitation import OtherCitation
-
+import sys
 
 class CitationRepository:
     def create_new_book_citation(self, book:Book):
@@ -15,15 +15,17 @@ class CitationRepository:
         return book
 
     def create_new_article_citation(self, article: Article):
+        db.session.add(Citation(owner_id = article.owner_id, given_id= article.given_id, type="article"))
+        db.session.commit()
         db.session.add(article)
-        db.session.add(Citation(owner_id = article.owner_id, given_id= article.given_id, type="book"))
         db.session.commit()
 
         return article
 
     def create_new_other_citation(self, other_citation: OtherCitation):
+        db.session.add(Citation(owner_id = other_citation.owner_id, given_id= other_citation.given_id, type="other"))
+        db.session.commit()
         db.session.add(other_citation)
-        db.session.add(Citation(owner_id = other_citation.owner_id, given_id= other_citation.given_id, type="book"))
         db.session.commit()
 
         return other_citation
