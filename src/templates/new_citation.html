@@ -1,37 +1,13 @@
-<title>Uusi viite</title>
+<title>Viitteen tyyppi</title>
 
-<h1>Uusi viite</h1>
+<h1>Valitse viitteen tyyppi</h1>
 
 <form action="/new_citation" method="post">
-  {% with messages = get_flashed_messages() %} {% if messages %}
-  <ul>
-    {% for message in messages %}
-    <li>{{ message }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %} {% endwith %}
+    <select name="dropdown">
+        <option value = "book">Kirja</option>
+        <option value = "article">Artikkeli</option>
+        <option value = "other">Muu</option>
+    </select>
 
-  <div>
-    <label for="authors">Kirjottaja(t)</label> <br />
-    <textarea name="authors" rows="0" cols="50" placeholder="Nimi"></textarea>
-  </div>
-
-  <div>
-    <label for="title">Otsikko</label> <br />
-    <textarea name="title" rows="0" cols="50" placeholder="Otsikko"></textarea>
-  </div>
-
-  <div>
-    <label for="year">Vuosi</label> <br />
-    <input type="text" name="year" placeholder="Vuosi" />
-  </div>
-
-  <div>
-    <label for="given_id">ID (jätä tyhjäksi generoidaksesi automaattisesti)</label> <br />
-    <input type="text" name="given_id" placeholder="ID" />
-  </div>
-
-  <button>Luo viite</button>
-
-  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+    <button>Valitse viite</button>
 </form>

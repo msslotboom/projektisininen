@@ -7,8 +7,9 @@ from models.othercitation import OtherCitation
 
 class CitationRepository:
     def create_new_book_citation(self, book:Book):
-        db.session.add(book)
         db.session.add(Citation(owner_id = book.owner_id, given_id= book.given_id, type="book"))
+        db.session.commit()
+        db.session.add(book)
         db.session.commit()
 
         return book
@@ -20,7 +21,7 @@ class CitationRepository:
 
         return article
 
-    def create_new_book_citation(self, other_citation: OtherCitation):
+    def create_new_other_citation(self, other_citation: OtherCitation):
         db.session.add(other_citation)
         db.session.add(Citation(owner_id = other_citation.owner_id, given_id= other_citation.given_id, type="book"))
         db.session.commit()

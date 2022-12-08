@@ -3,7 +3,7 @@ from models.book import Book
 from models.article import Article
 from models.othercitation import OtherCitation
 from repositories.citation_repository import citation_repository
-
+import sys
 
 class UserInputError(Exception):
     pass
@@ -29,8 +29,9 @@ class CitationService:
             return False
 
     def create_book_citation(self, owner_id, given_id, author, title, editor, publisher, year):
+        print("create book service", file = sys.stdout)
         self.validate_citation(author, title, year, given_id)
-
+        print("Validation successful", file= sys.stdout)
         return self._citation_repo.create_new_book_citation(Book(
             owner_id=owner_id, given_id=given_id, author=author, title=title, editor=editor, publisher=publisher, year=year
             ))
