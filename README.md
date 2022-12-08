@@ -27,3 +27,4 @@ Testeille kannattaa tehdä oma tietokanta. Tee projektin juureen tiedosto `.env.
 
 ### Robot-testit
 Robot-testien suorittamista varten avaa sovellus toisessa terminaalissa komennolla `dotenv -f .env.test run -- python3 src/start.py`. Sen jälkeen testit voi ajaa normaalisti komennolla `robot src/tests/robot`.
+
