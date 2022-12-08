@@ -1,4 +1,7 @@
 from models.citation import Citation
+from models.book import Book
+from models.article import Article
+from models.othercitation import OtherCitation
 from repositories.citation_repository import citation_repository
 
 
@@ -25,11 +28,27 @@ class CitationService:
         else:
             return False
 
-    def create_citation(self, owner_id, authors, title, year, given_id):
-        self.validate_citation(authors, title, year, given_id)
+    def create_book_citation(self, owner_id, given_id, author, title, editor, publisher, year):
+        self.validate_citation(author, title, year, given_id)
 
-        return self._citation_repo.create_new_citation(Citation(owner_id=owner_id, authors=authors, title=title, year=year, given_id=given_id))
-    
+        return self._citation_repo.create_new_book_citation(Book(
+            owner_id=owner_id, given_id=given_id, author=author, title=title, editor=editor, publisher=publisher, year=year
+            ))
+
+    def create_article_citation(self, owner_id, given_id, author, title, journal, year):
+        self.validate_citation(author, title, year, given_id)
+
+        return self._citation_repo.create_new_book_citation(Article(
+            owner_id=owner_id, given_id=given_id, author=author, title=title, journal=journal, year=year
+            ))
+
+    def create_other_citation(self, owner_id, given_id, author, title, type, other, year):
+        self.validate_citation(author, title, year, given_id)
+
+        return self._citation_repo.create_new_book_citation(OtherCitation(
+            owner_id=owner_id, given_id=given_id, author=author, title=title, type=type, other=other, year=year
+            ))
+
     def edit_citation(self, citation_id, authors, title, year, given_id):
         self.validate_citation(authors, title, year, given_id)
         self._citation_repo.edit_citation(citation_id, authors, title, year, given_id)
