@@ -6,6 +6,5 @@ class Citation(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     authors = db.Column(db.Text)
-    title = db.Column(db.String)
-    year = db.Column(db.Integer)
+    type = db.Column(db.String)
     given_id = db.Column(db.Integer)
