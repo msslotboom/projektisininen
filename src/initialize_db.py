@@ -28,7 +28,7 @@ def create_tables():
     CREATE TABLE books (
         id SERIAL PRIMARY KEY,
         owner_id TEXT,
-        citation_id TEXT,
+        given_id TEXT,
         author TEXT,
         editor TEXT,
         title TEXT,
@@ -42,7 +42,7 @@ def create_tables():
     CREATE TABLE articles (
         id SERIAL PRIMARY KEY,
         owner_id TEXT,
-        citation_id TEXT,
+        given_id TEXT,
         author TEXT,
         title TEXT,
         journal TEXT,
@@ -55,7 +55,7 @@ def create_tables():
     CREATE TABLE othercitations (
         id SERIAL PRIMARY KEY,
         owner_id TEXT,
-        citation_id TEXT,
+        given_id TEXT,
         author TEXT,
         title TEXT,
         type TEXT,
