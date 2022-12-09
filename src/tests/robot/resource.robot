@@ -11,6 +11,7 @@ ${HOME URL}  http://${SERVER}/
 ${LOGIN URL}  http://${SERVER}/login
 ${REGISTER URL}  http://${SERVER}/register
 ${REFERENCES URL}  http://${SERVER}/citations
+${NEW CITATION URL}  http://${SERVER}/new_citation
 
 *** Keywords ***
 Open And Configure Browser
@@ -27,6 +28,9 @@ Go To Registration Page
 Go To References Page
     Go To  ${References URL}
 
+Go To New Citation Page
+    Go To  ${NEW CITATION URL}
+
 Main Page Should Be Open
     Location Should Be  ${HOME URL}
 
@@ -35,3 +39,9 @@ Login Page Should Be Open
 
 Registration Page Should Be Open
     Location Should Be  ${REGISTER URL}
+
+New Citation Page Should Be Open
+    Location Should Be  ${NEW CITATION URL}
+
+References Page Should Be Open
+    Location Should Be  ${REFERENCES URL}
