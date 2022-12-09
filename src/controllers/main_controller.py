@@ -71,6 +71,8 @@ def handle_new_citation_choice():
         return render_template("new_book.html")
     elif dropdown == "article":
         return render_template("new_article.html")
+    elif dropdown == "other":
+        return render_template("other_citation.html")
 
 @main_controller.route("/new_book", methods=["POST"])
 def handle_new_book_citation():
@@ -130,16 +132,17 @@ def handle_new_other_citation():
         owner_id = user_service.get_session_user_id()
         authors = request.form.get("authors")
         title = request.form.get("title")
-        journal = request.form.get("journal")
-        year = request.form.get("year")
+        type = request.form.get("type")
+        other = request.form.get("other")
         given_id = request.form.get("given_id")
+        year = request.form.get("year")
         if (year == ""): #Antaa muuten virheellisen error messagen, citation_servicen validointi kohdassa or not year ei toimi
             year = 2031
         if (given_id == ""): #Jos ID kohta jätetty tyhjäksi, etsitään sopiva ID automaattisesti
             if not citation_service.check_duplicate_given_id(authors + title):
                 given_id = authors + title
             # TODO
-        citation_service.create_article_citation(int(owner_id), given_id, authors, title, journal, int(year))
+        citation_service.create_other_citation(int(owner_id), given_id, authors, title, type, other, int(year))
         return redirect("/citations")
     except Exception as error:
         print(error, file=sys.stdout)
