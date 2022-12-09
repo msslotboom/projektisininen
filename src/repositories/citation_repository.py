@@ -28,7 +28,7 @@ class CitationRepository:
         return Citation.__table__.columns.keys()
     
     def delete_citation(self, citation_id):
-        citation_obj = Citation.query.filter_by(id=citation_id).one()
+        citation_obj = Citation.query.filter_by(id=citation_id).first()
 
         db.session.delete(citation_obj)
         db.session.commit()

@@ -37,7 +37,7 @@ class CitationService:
     def get_citations(self, owner_id):
         citations = []
         for citation in self._citation_repo.get_all_citations(owner_id):
-            citations.append((citation.authors, citation.title, citation.year, citation.given_id, citation.id))
+            citations.append(citation)
         
         return citations
 

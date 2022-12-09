@@ -4,25 +4,19 @@
 
 {% for citation in citations %}
 <ul>
-<li>Kirjoittajat: {{ citation[0] }}</li>
-<li>Otsikko: {{ citation[1] }}</li>
-<li>Vuosi: {{ citation[2] }}</li>
-<li>ID: {{ citation[3] }}</li>
+    <li>Kirjoittajat: {{ citation.authors }}</li>
+    <li>Otsikko: {{ citation.title }}</li>
+    <li>Vuosi: {{ citation.year }}</li>
+    <li>ID: {{ citation.given_id }}</li>
 </ul>
 <form action="/delete_citation" method="POST">
-    <input type="hidden" name="citation_id" value="{{ citation[3] }}">
+    <input type="hidden" name="citation_id" value="{{ citation.id }}">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="submit" value="poista">
 </form>
 <form action="/edit_citation" method="GET" target="_blank">
-    <input type="hidden" name="citation_id" value="{{ citation[3] }}">
+    <input type="hidden" name="citation_id" value="{{ citation.id }}">
     <input type="submit" value="muokkaa">
-</form>
-<br>
-<form action="/delete_citation" method="POST">
-    <input type="hidden" name="citation_id" value="{{ citation[3] }}">
-    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
-    <input type="submit" value="poista">
 </form>
 
 
