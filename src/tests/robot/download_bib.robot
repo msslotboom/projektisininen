@@ -12,3 +12,10 @@ Download Bibliography Of References
     Click Link  Lataa
     Sleep  1s
     File Should Exist  ${CURDIR}/../../templates/download.html
+
+Create Valid Sitation And Download Bibliography
+    Go To References Page
+    Create Valid Sitation
+    Click Link  Lataa
+    Sleep  1s
+    File Should Not Be Empty  ${CURDIR}/../../templates/download.html
