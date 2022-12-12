@@ -1,13 +1,34 @@
 from app import db
 from models.citation import Citation
-
+from models.book import Book
+from models.article import Article
+from models.othercitation import OtherCitation
+import sys
 
 class CitationRepository:
-    def create_new_citation(self, citation: Citation):
-        db.session.add(citation)
+    def create_new_book_citation(self, book:Book):
+        db.session.add(Citation(owner_id = book.owner_id, given_id= book.given_id, type="book"))
+        db.session.commit()
+        db.session.add(book)
         db.session.commit()
 
-        return citation
+        return book
+
+    def create_new_article_citation(self, article: Article):
+        db.session.add(Citation(owner_id = article.owner_id, given_id= article.given_id, type="article"))
+        db.session.commit()
+        db.session.add(article)
+        db.session.commit()
+
+        return article
+
+    def create_new_other_citation(self, other_citation: OtherCitation):
+        db.session.add(Citation(owner_id = other_citation.owner_id, given_id= other_citation.given_id, type="other"))
+        db.session.commit()
+        db.session.add(other_citation)
+        db.session.commit()
+
+        return other_citation
     
     def edit_citation(self, citation_id, authors, title, year, given_id):
         Citation.query.filter_by(id=citation_id).\

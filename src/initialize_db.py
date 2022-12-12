@@ -18,11 +18,50 @@ def create_tables():
         CREATE TABLE citations (
             id SERIAL PRIMARY KEY,
             owner_id INTEGER REFERENCES users,
-            authors TEXT,
-            title TEXT,
-            year INTEGER,
-            given_id INTEGER
+            given_id TEXT,
+            type TEXT
         );
+    """)
+    db.session.commit()
+
+    db.session.execute("""
+    CREATE TABLE books (
+        id SERIAL PRIMARY KEY,
+        owner_id INTEGER REFERENCES users,
+        given_id TEXT,
+        author TEXT,
+        editor TEXT,
+        title TEXT,
+        publisher TEXT,
+        year INTEGER
+    );
+    """)
+    db.session.commit()
+
+    db.session.execute("""
+    CREATE TABLE articles (
+        id SERIAL PRIMARY KEY,
+        owner_id INTEGER REFERENCES users,
+        given_id TEXT,
+        author TEXT,
+        title TEXT,
+        journal TEXT,
+        year INTEGER
+    );
+    """)
+    db.session.commit()
+
+    db.session.execute("""
+    CREATE TABLE othercitations (
+        id SERIAL PRIMARY KEY,
+        owner_id INTEGER REFERENCES users,
+        given_id TEXT,
+        author TEXT,
+        title TEXT,
+        type TEXT,
+        other TEXT,
+        year INTEGER
+    );
     """)
     db.session.commit()
 
@@ -34,6 +73,21 @@ def drop_tables():
 
     db.session.execute("""
         DROP TABLE IF EXISTS citations CASCADE;
+    """)
+    db.session.commit()
+
+    db.session.execute("""
+        DROP TABLE IF EXISTS books CASCADE;
+    """)
+    db.session.commit()
+
+    db.session.execute("""
+        DROP TABLE IF EXISTS articles CASCADE;
+    """)
+    db.session.commit()
+
+    db.session.execute("""
+        DROP TABLE IF EXISTS othercitations CASCADE;
     """)
     db.session.commit()
 
