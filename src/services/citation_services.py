@@ -21,12 +21,8 @@ class CitationService:
         elif self.check_duplicate_given_id(given_id):
             raise UserInputError("Annettu ID on jo käytössä")
 
-    def check_duplicate_given_id(self, given_id):
-        id = self._citation_repo.find_by_given_id(given_id)
-        if (id is not None):
-            return True
-        else:
-            return False
+    def check_duplicate_given_id(self, id):
+        return self._citation_repo.find_by_given_id(id) is not None
 
     def create_book_citation(self, owner_id, given_id, author, title, editor, publisher, year):
         self.validate_citation(author, title, year, given_id)
