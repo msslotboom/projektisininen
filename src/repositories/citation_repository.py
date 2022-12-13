@@ -52,12 +52,17 @@ class CitationRepository:
         if type == "article":
             article_obj = Article.query.filter_by(id=citation_id).first()
             db.session.delete(article_obj)
+            db.session.commit()
+
         elif type == "book":
             book_obj = Book.query.filter_by(id=citation_id).first()
             db.session.delete(book_obj)
+            db.session.commit()
+
         elif type == "other":
             other_obj = OtherCitation.query.filter_by(id=citation_id).first()
             db.session.delete(other_obj)
+            db.session.commit()
 
         citation_obj = Citation.query.filter_by(id=citation_id).first()
 
