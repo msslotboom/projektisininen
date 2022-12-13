@@ -69,8 +69,8 @@ class CitationService:
     def get_content_by_id(self, citation_id):
         return self._citation_repo.get_citation(citation_id)
 
-    def delete_citation(self, citation_id):
-        self._citation_repo.delete_citation(citation_id)
+    def delete_citation(self, citation_id, type):
+        self._citation_repo.delete_citation(citation_id, type)
 
     def delete_all_citations(self):
         return self._citation_repo.delete_all_citations()

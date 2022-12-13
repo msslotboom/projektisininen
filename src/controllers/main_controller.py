@@ -158,7 +158,8 @@ def handle_delete_citation():
         csrf_token = request.form["csrf_token"]
         user_service.check_csrf(csrf_token)
         citation_id = request.form["citation_id"]
-        citation_service.delete_citation(citation_id)
+        citation_type = request.form["citation_type"]
+        citation_service.delete_citation(citation_id, citation_type)
         return redirect("/citations")
     except Exception as error:
         flash(str(error))

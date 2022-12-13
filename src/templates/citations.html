@@ -11,6 +11,7 @@
 </ul>
 <form action="/delete_citation" method="POST">
     <input type="hidden" name="citation_id" value="{{ citation.id }}">
+    <input type="hidden" name="citation_type" value="{{ citation.type }}">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="submit" value="poista">
 </form>

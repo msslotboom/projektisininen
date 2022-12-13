@@ -48,7 +48,17 @@ class CitationRepository:
     def get_all_citation_table_names(self):
         return Citation.__table__.columns.keys()
     
-    def delete_citation(self, citation_id):
+    def delete_citation(self, citation_id, type):
+        if type == "article":
+            article_obj = Article.query.filter_by(id=citation_id).first()
+            db.session.delete(article_obj)
+        elif type == "book":
+            book_obj = Book.query.filter_by(id=citation_id).first()
+            db.session.delete(book_obj)
+        elif type == "other":
+            other_obj = OtherCitation.query.filter_by(id=citation_id).first()
+            db.session.delete(other_obj)
+
         citation_obj = Citation.query.filter_by(id=citation_id).first()
 
         db.session.delete(citation_obj)
