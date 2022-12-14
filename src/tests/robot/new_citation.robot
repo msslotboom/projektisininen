@@ -5,14 +5,11 @@ Resource  citation_resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
 Test Setup  Create User And Login
-Library BuiltIn
 
 
 *** Test Cases ***
-Create A New Book Citation With Valid Arguments
+Create A New Citation With Valid Arguments
     Go To New Citation Page
-    Click Button  Valitse viite
-    Select From List locator:id=dropdown value=book
     Set Authors  Kirjoittaja
     Set Title  Otsikko
     Set Year  1234
