@@ -24,22 +24,25 @@ class CitationRepository:
         return other_citation
     
     def edit_citation(self, citation_id, authors, title, year, given_id):
-        Citation.query.filter_by(id=citation_id).\
-            update({'authors':authors})
-        Citation.query.filter_by(id=citation_id).\
-            update({'title':title})
-        Citation.query.filter_by(id=citation_id).\
-            update({'year':year})
-        Citation.query.filter_by(id=citation_id).\
-            update({'given_id':given_id})
-        db.session.commit()
-        return self.get_citation(citation_id)
+        # Citation.query.filter_by(id=citation_id).\
+        #     update({'authors':authors})
+        # Citation.query.filter_by(id=citation_id).\
+        #     update({'title':title})
+        # Citation.query.filter_by(id=citation_id).\
+        #     update({'year':year})
+        # Citation.query.filter_by(id=citation_id).\
+        #     update({'given_id':given_id})
+        # db.session.commit()
+        # return self.get_citation(citation_id)
+        pass
 
     def get_all_citations(self, user_id):
-        return Citation.query.filter_by(owner_id=user_id)
+        # return Citation.query.filter_by(owner_id=user_id)
+        pass
     
     def get_all_citation_table_names(self):
-        return Citation.__table__.columns.keys()
+        # return Citation.__table__.columns.keys()
+        pass
     
     def delete_citation(self, citation_id, type):
         if type == "article":
@@ -70,8 +73,9 @@ class CitationRepository:
         return Citation.query.filter_by(id=citation_id).first()
 
     def find_by_given_id(self, given_id):
-        id = Citation.query.filter_by(given_id=given_id).first()
-        return id
+        #id = Citation.query.filter_by(given_id=given_id).first()
+        #return id
+        pass
 
 
 
