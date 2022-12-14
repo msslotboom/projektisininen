@@ -129,7 +129,7 @@ def handle_new_other_citation():
         owner_id = user_service.get_session_user_id()
         authors = request.form.get("authors")
         title = request.form.get("title")
-        type = request.form.get("type")
+        citation_type = request.form.get("type")
         other = request.form.get("other")
         given_id = request.form.get("given_id")
         year = request.form.get("year")
@@ -139,7 +139,7 @@ def handle_new_other_citation():
             if not citation_service.check_duplicate_given_id(authors + title):
                 given_id = authors + title
             # TODO
-        citation_service.create_other_citation(int(owner_id), given_id, authors, title, type, other, int(year))
+        citation_service.create_other_citation(int(owner_id), given_id, authors, title, citation_type, other, int(year))
         return redirect("/citations")
     except Exception as error:
         print(error, file=sys.stdout)
