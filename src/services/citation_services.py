@@ -44,14 +44,30 @@ class CitationService:
     def create_other_citation(self, owner_id, given_id, author, title, type, other, year):
         self.validate_citation(author, title, year, given_id)
 
-        return self._citation_repo.create_new_book_citation(OtherCitation(
+        return self._citation_repo.create_new_other_citation(OtherCitation(
             owner_id=owner_id, given_id=given_id, author=author, title=title, type=type, other=other, year=year
             ))
 
-    def edit_citation(self, citation_id, authors, title, year, given_id):
-        self.validate_citation(authors, title, year, given_id)
-        self._citation_repo.edit_citation(citation_id, authors, title, year, given_id)
+    def edit_citation(self, citation_id, author, title, year, given_id,
+                     journal=None, other=None, type=None, editor=None, publisher=None):
+        self.validate_citation(author, title, year, given_id)
+        if other != None and type != None:
+            self._citation_repo.edit_other_citation(
+            citation_id=citation_id, given_id=given_id, author=author, title=title, year=year, other=other, type=type 
+            )
+        elif journal != None:
+            self._citation_repo.edit_journal_citation(
+            citation_id=citation_id, given_id=given_id, author=author, title=title, year=year, journal=journal
+            )
+        elif editor != None and publisher != None:
+            self._citation_repo.edit_book_citation(
+                citation_id=citation_id, given_id=given_id, author=author, title=title, year=year, editor=editor, publisher=publisher
+            )
+        else:
+            raise UserInputError("viitteellä ei ole tyyppiä")
+        return self.get_content_by_id(citation_id)
 
+       
     def get_citations(self, owner_id):
         citations = []
         for citation in self._citation_repo.get_all_citations(owner_id):

@@ -3,6 +3,7 @@ from repositories.user_repository import user_repository
 from models.user import User
 from repositories.citation_repository import citation_repository
 from models.citation import Citation
+from models.othercitation import OtherCitation
 
 class TestCitationRepository(unittest.TestCase):
     @classmethod
@@ -58,3 +59,13 @@ class TestCitationRepository(unittest.TestCase):
         self.assertEqual(u_viite.title, "parempi kirja")
         self.assertEqual(u_viite.year, 2002)
         self.assertEqual(u_viite.given_id, 2)
+    
+    def test_edit_other_citation(self):
+        viite = citation_repository.create_new_other_citation(OtherCitation(
+            owner_id=1, given_id=1, author="author", title="title", type="type", other="other", year=2021
+        ))
+        uusi_viite = citation_repository.edit_other_citation(
+            citation_id=viite.id, given_id=2, author="author2", title="title2", type="type2", other="other2", year=2022
+        )
+        self.assertEqual(uusi_viite.author, "author2")
+        self.assertNotEqual(uusi_viite.title, "title")

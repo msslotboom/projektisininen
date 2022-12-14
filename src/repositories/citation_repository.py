@@ -41,6 +41,36 @@ class CitationRepository:
             update({'given_id':given_id})
         db.session.commit()
         return self.get_citation(citation_id)
+    
+    def edit_other_citation(self, citation_id, given_id, author, title, year, other, type):
+        OtherCitation.query.filter_by(id=citation_id).\
+            update({'author':author})
+        OtherCitation.query.filter_by(id=citation_id).\
+            update({'title':title})
+        OtherCitation.query.filter_by(id=citation_id).\
+            update({'year':year})
+        OtherCitation.query.filter_by(id=citation_id).\
+            update({'given_id':given_id})
+        OtherCitation.query.filter_by(id=citation_id).\
+            update({'type':type})
+        OtherCitation.query.filter_by(id=citation_id).\
+            update({'other':other})
+        db.session.commit()
+        return self.get_citation(citation_id)
+        
+        '''edit = db.update(OtherCitation).where(
+            OtherCitation.id == citation_id
+        ).values(
+            [{given_id:given_id},
+            {author:author},
+            {title:title},
+            {year:year},
+            {other:other},
+            {type:type}]
+        )
+        db.session.execute(edit)'''
+        return self.get_citation(citation_id)
+            
 
     def get_all_citations(self, user_id):
         return Citation.query.filter_by(owner_id=user_id)
@@ -76,7 +106,9 @@ class CitationRepository:
         return return_value
     
     def get_citation(self, citation_id):
-        return Citation.query.filter_by(id=citation_id).first()
+        info = Citation.query.filter_by(id=citation_id).first()
+        if info.type == "other":
+            return OtherCitation.query.filter_by(id=citation_id).first()
 
     def find_by_given_id(self, given_id):
         id = Citation.query.filter_by(given_id=given_id).first()
