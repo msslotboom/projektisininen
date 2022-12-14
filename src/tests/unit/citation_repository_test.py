@@ -6,6 +6,7 @@ from models.othercitation import OtherCitation
 from models.article import Article
 from repositories.citation_repository import citation_repository
 from repositories.user_repository import user_repository
+from services.user_services import UserService
 
 
 class TestCitationRepository(unittest.TestCase):
@@ -13,9 +14,9 @@ class TestCitationRepository(unittest.TestCase):
     def setUp(self):
         citation_repository.delete_all_citations()
         user_repository.delete_all_users()
-        user_repository.create_new_user(
-            User(username="Jaakko", password="salasana1"))
-        self.omistaja_id = 1
+        user_service = UserService(user_repository)
+        user_service.create_user("Jaakko", "Salasana1", "Salasana1")
+        self.omistaja_id = user_repository.get_id("Jaakko")
 
     def test_create_new_book_citation(self):
         citation_repository.create_new_book_citation(
