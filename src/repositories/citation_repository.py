@@ -35,11 +35,29 @@ class CitationRepository:
         db.session.commit()
         return self.get_citation(citation_id)
 
+    def get_all_article_citations(self, user_id):
+        return Article.query.filter_by(owner_id=user_id)
+
+    def get_all_book_citations(self, user_id):
+        return Book.query.filter_by(owner_id=user_id)
+
+    def get_all_other_citations(self, user_id):
+        return OtherCitation.query.filter_by(owner_id=user_id)
+
     def get_all_citations(self, user_id):
-        return Citation.query.filter_by(owner_id=user_id)
+        all_citations = []
+        all_citations.append(Article.query.filter_by(owner_id=user_id))
+        all_citations.append(OtherCitation.query.filter_by(owner_id=user_id))
+        all_citations.append(Book.query.filter_by(owner_id=user_id))
+        
+        return all_citations
     
     def get_all_citation_table_names(self):
-        return Citation.__table__.columns.keys()
+        all_table_names = []
+        all_table_names.append(Article.__table__.columns.keys())
+        all_table_names.append(Book.__table__.columns.keys())
+        all_table_names.append(OtherCitation.__table__.columns.keys())
+        return all_table_names
     
     def delete_citation(self, citation_id, type):
         if type == "article":
@@ -70,7 +88,9 @@ class CitationRepository:
         return Citation.query.filter_by(id=citation_id).first()
 
     def find_by_given_id(self, given_id):
-        id = Citation.query.filter_by(given_id=given_id).first()
+        id = Article.query.filter_by(given_id=given_id).first()
+        id += Book.query.filter_by(given_id=given_id).first()
+        id += OtherCitation.query.filter_by(given_id=given_id).first()
         return id
 
 

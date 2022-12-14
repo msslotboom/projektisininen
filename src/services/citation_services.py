@@ -50,11 +50,33 @@ class CitationService:
     def edit_citation(self, citation_id, authors, title, year, given_id):
         self.validate_citation(authors, title, year, given_id)
         self._citation_repo.edit_citation(citation_id, authors, title, year, given_id)
+    
+    def get_article_citations(self, owner_id):
+        article_citations = []
+        for article_citation in self._citation_repo.get_all_article_citations(owner_id):
+            article_citations.append(article_citation)
+        return article_citations
+
+    def get_book_citations(self, owner_id):
+        book_citations = []
+        for book_citation in self._citation_repo.get_all_book_citations(owner_id):
+            book_citations.append(book_citation)
+        return book_citations
+    
+    def get_other_citations(self, owner_id):
+        other_citations = []
+        for other_citation in self._citation_repo.get_all_other_citations(owner_id):
+            other_citations.append(other_citation)
+        return other_citations
 
     def get_citations(self, owner_id):
         citations = []
-        for citation in self._citation_repo.get_all_citations(owner_id):
-            citations.append(citation)
+        citation_query_list = self._citation_repo.get_all_citations(owner_id)
+
+        for list_length in range(len(citation_query_list)):
+            for citation in citation_query_list[list_length]:
+                citations.append(citation)
+        
         
         return citations
 

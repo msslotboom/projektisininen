@@ -147,8 +147,10 @@ def handle_new_other_citation():
 @main_controller.route("/citations", methods=["GET"])
 def render_citations():
     user_id = user_service.get_session_user_id()
-    citations = citation_service.get_citations(user_id)
-    return render_template("citations.html", citations=citations)
+    article_citations = citation_service.get_article_citations(user_id)
+    book_citations = citation_service.get_book_citations(user_id)
+    other_citations = citation_service.get_other_citations(user_id)
+    return render_template("citations.html", articles=article_citations, books=book_citations, others=other_citations)
 
 @main_controller.route("/delete_citation", methods=["POST"])
 def handle_delete_citation():
