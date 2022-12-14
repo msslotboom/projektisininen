@@ -13,21 +13,11 @@ class Bibgen:
         citation_list = self._citations.get_citations(owner_id)
         
         converted_columns = self.convert_to_bib_variables(citation_list)
-        print(converted_columns)
-        print(len(converted_columns[0]))
         
         reordered_citation_list = self.reorder_citation_list_for_bib(citation_list)
-        print(reordered_citation_list)
-        print(len(reordered_citation_list[0]))
 
         bib_as_text = ''
         
-        #citation_columns = self._citations.get_citations_column_names()
-        #converted_columns = self.convert_to_bib_variables(citation_columns)
-        #citation_list = self._citations.get_citations(owner_id)
-        #reordered_citation_list = self.reorder_citation_list_for_bib(citation_list)
-        #bib_as_text = ''
-
         for item in range(len(citation_list)):
             for column in range(len(reordered_citation_list[item])):
                 if column == 0:
@@ -72,7 +62,6 @@ class Bibgen:
         reordered_list = []
         for item in list:
             if isinstance(item, Book):
-                print(self._citations.get_book_citation_values(item))
                 reordered_list.append(self._citations.get_book_citation_values(item))
             elif isinstance(item, Article):
                 reordered_list.append(self._citations.get_article_citation_values(item))
