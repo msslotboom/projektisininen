@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, flash
 from services.user_services import user_service
 from services.citation_services import citation_service
 from services.bibgen import bibliography_generator
+import sys
 
 main_controller = Blueprint("main_controller", __name__)
 
@@ -60,6 +61,7 @@ def handle_register():
 def render_new_citation():
     return render_template("new_citation.html")
 
+
 @main_controller.route("/new_citation", methods=["POST"])
 def handle_new_citation_choice():
     dropdown = request.form.get("dropdown")
@@ -70,6 +72,7 @@ def handle_new_citation_choice():
         return render_template("new_article.html")
     elif dropdown == "other":
         return render_template("other_citation.html")
+
 
 @main_controller.route("/new_book", methods=["POST"])
 def handle_new_book_citation():
@@ -83,13 +86,15 @@ def handle_new_book_citation():
         publisher = request.form.get("publisher")
         year = request.form.get("year")
         given_id = request.form.get("given_id")
-        if (year == ""): #Antaa muuten virheellisen error messagen, citation_servicen validointi kohdassa or not year ei toimi
+
+        if (year == ""):  # Antaa muuten virheellisen error messagen, citation_servicen validointi kohdassa or not year ei toimi
             year = 2031
-        if (given_id == ""): #Jos ID kohta jätetty tyhjäksi, etsitään sopiva ID automaattisesti
-            if not citation_service.check_duplicate_given_id(authors + title):
-                given_id = authors + title
-            # TODO
-        citation_service.create_book_citation(int(owner_id), given_id, authors, title, editor, publisher, int(year))
+
+        if (given_id == ""):  # Jos ID kohta jätetty tyhjäksi, luodaan sopiva ID automaattisesti
+            given_id = citation_service.generate_given_id(authors, year)
+
+        citation_service.create_book_citation(
+            int(owner_id), given_id, authors, title, editor, publisher, int(year))
         return redirect("/citations")
     except Exception as error:
         print(error, file=sys.stdout)
@@ -108,18 +113,21 @@ def handle_new_article_citation():
         journal = request.form.get("journal")
         year = request.form.get("year")
         given_id = request.form.get("given_id")
-        if (year == ""): #Antaa muuten virheellisen error messagen, citation_servicen validointi kohdassa or not year ei toimi
+
+        if (year == ""):  # Antaa muuten virheellisen error messagen, citation_servicen validointi kohdassa or not year ei toimi
             year = 2031
-        if (given_id == ""): #Jos ID kohta jätetty tyhjäksi, etsitään sopiva ID automaattisesti
-            if not citation_service.check_duplicate_given_id(authors + title):
-                given_id = authors + title
-            # TODO
-        citation_service.create_article_citation(int(owner_id), given_id, authors, title, journal, int(year))
+
+        if (given_id == ""):  # Jos ID kohta jätetty tyhjäksi, luodaan sopiva ID automaattisesti
+            given_id = citation_service.generate_given_id(authors, year)
+
+        citation_service.create_article_citation(
+            int(owner_id), given_id, authors, title, journal, int(year))
         return redirect("/citations")
     except Exception as error:
         print(error, file=sys.stdout)
         flash(str(error))
         return render_template("/new_article.html")
+
 
 @main_controller.route("/new_other_citation", methods=["POST"])
 def handle_new_other_citation():
@@ -133,37 +141,46 @@ def handle_new_other_citation():
         other = request.form.get("other")
         given_id = request.form.get("given_id")
         year = request.form.get("year")
-        if (year == ""): #Antaa muuten virheellisen error messagen, citation_servicen validointi kohdassa or not year ei toimi
+        if (year == ""):  # Antaa muuten virheellisen error messagen, citation_servicen validointi kohdassa or not year ei toimi
             year = 2031
-        if (given_id == ""): #Jos ID kohta jätetty tyhjäksi, etsitään sopiva ID automaattisesti
-            if not citation_service.check_duplicate_given_id(authors + title):
-                given_id = authors + title
-            # TODO
-        citation_service.create_other_citation(int(owner_id), given_id, authors, title, type, other, int(year))
+
+        if (given_id == ""):  # Jos ID kohta jätetty tyhjäksi, luodaan sopiva ID automaattisesti
+            given_id = citation_service.generate_given_id(authors, year)
+
+        citation_service.create_other_citation(
+            int(owner_id), given_id, authors, title, type, other, int(year))
         return redirect("/citations")
     except Exception as error:
         print(error, file=sys.stdout)
         flash(str(error))
         return render_template("/new_article.html")
 
+
 @main_controller.route("/citations", methods=["GET"])
 def render_citations():
     user_id = user_service.get_session_user_id()
-    citations = citation_service.get_citations(user_id)
-    return render_template("citations.html", citations=citations)
+    article_citations = citation_service.get_article_citations(user_id)
+    book_citations = citation_service.get_book_citations(user_id)
+    other_citations = citation_service.get_other_citations(user_id)
+    return render_template("citations.html", articles=article_citations, books=book_citations, others=other_citations)
+
 
 @main_controller.route("/delete_citation", methods=["POST"])
 def handle_delete_citation():
     try:
         csrf_token = request.form["csrf_token"]
         user_service.check_csrf(csrf_token)
-        citation_id = request.form["citation_id"]
-        citation_type = request.form["citation_type"]
-        citation_service.delete_citation(citation_id, citation_type)
+        owner_id = user_service.get_session_user_id()
+
+        given_id = request.form["given_id"]
+        citation_service.delete_citation(given_id, owner_id)
+
         return redirect("/citations")
+
     except Exception as error:
         flash(str(error))
-        return redirect("/delete_citation")
+
+        return redirect("/citations")
 
 
 @main_controller.route("/edit_citation", methods=["GET"])
@@ -176,6 +193,7 @@ def render_edit_citation():
         flash(str(error))
         return redirect("/edit_citation")
 
+
 @main_controller.route("/edit_citation", methods=["POST"])
 def handle_edit_citation():
     try:
@@ -186,11 +204,13 @@ def handle_edit_citation():
         title = request.form.get("title")
         year = request.form.get("year")
         given_id = request.form.get("given_id")
-        citation_service.edit_citation(citation_id, authors, title, int(year), int(given_id))
+        citation_service.edit_citation(
+            citation_id, authors, title, int(year), int(given_id))
         return redirect("/citations")
     except Exception as error:
         flash(str(error))
         return redirect("/edit_citation")
+
 
 @main_controller.route("/download", methods=["GET"])
 def handle_download():

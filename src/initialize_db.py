@@ -15,16 +15,6 @@ def create_tables():
     """)
 
     db.session.execute("""
-        CREATE TABLE citations (
-            id SERIAL PRIMARY KEY,
-            owner_id INTEGER REFERENCES users,
-            given_id TEXT,
-            type TEXT
-        );
-    """)
-    db.session.commit()
-
-    db.session.execute("""
     CREATE TABLE books (
         id SERIAL PRIMARY KEY,
         owner_id INTEGER REFERENCES users,
