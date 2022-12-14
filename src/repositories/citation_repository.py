@@ -5,7 +5,7 @@ from models.othercitation import OtherCitation
 
 
 class CitationRepository:
-    def create_new_book_citation(self, book:Book):
+    def create_new_book_citation(self, book: Book):
         db.session.add(book)
         db.session.commit()
 
@@ -22,7 +22,7 @@ class CitationRepository:
         db.session.commit()
 
         return other_citation
-    
+
     def edit_citation(self, citation_id, authors, title, year, given_id):
         # Citation.query.filter_by(id=citation_id).\
         #     update({'authors':authors})
@@ -48,33 +48,29 @@ class CitationRepository:
     def get_all_citations(self, user_id):
 
         all_citations = []
-        all_citations.append(Article.query.filter_by(owner_id=user_id))
-        all_citations.append(OtherCitation.query.filter_by(owner_id=user_id))
-        all_citations.append(Book.query.filter_by(owner_id=user_id))
-        
+
+        for book in Book.query.filter_by(owner_id=user_id):
+            all_citations.append(book)
+
+        for article in Article.query.filter_by(owner_id=user_id):
+            all_citations.append(article)
+
+        for other in OtherCitation.query.filter_by(owner_id=user_id):
+            all_citations.append(other)
+
         return all_citations
-    
+
     def get_all_citation_table_names(self):
         all_table_names = []
         all_table_names.append(Article.__table__.columns.keys())
         all_table_names.append(Book.__table__.columns.keys())
         all_table_names.append(OtherCitation.__table__.columns.keys())
         return all_table_names
-    
+
     def delete_citation(self, given_id, owner_id):
-        for book in self.get_all_book_citations(owner_id):
-            if book.given_id == given_id:
-                db.session.delete(book)
-                db.session.commit()
-
-        for article in self.get_all_article_citations(owner_id):
-            if article.given_id == given_id:
-                db.session.delete(article)
-                db.session.commit()
-
-        for other in self.get_all_other_citations(owner_id):
-            if other.given_id == given_id:
-                db.session.delete(other)
+        for citation in self.get_all_citations(owner_id):
+            if citation.given_id == given_id:
+                db.session.delete(citation)
                 db.session.commit()
 
     def delete_all_citations(self):
@@ -84,18 +80,18 @@ class CitationRepository:
         db.session.commit()
 
         return books + articles + other_citations
-    
+
     def get_citation(self, citation_id):
-        #return Citation.query.filter_by(id=citation_id).first()
+        # return Citation.query.filter_by(id=citation_id).first()
         pass
 
     def find_by_given_id(self, given_id, owner_id):
-        id = Article.query.filter_by(given_id=given_id, owner_id=owner_id).first()
+        id = Article.query.filter_by(
+            given_id=given_id, owner_id=owner_id).first()
         id = Book.query.filter_by(given_id=given_id, owner_id=owner_id).first()
-        id = OtherCitation.query.filter_by(given_id=given_id, owner_id=owner_id).first()
+        id = OtherCitation.query.filter_by(
+            given_id=given_id, owner_id=owner_id).first()
         return id
-
-
 
 
 citation_repository = CitationRepository()
