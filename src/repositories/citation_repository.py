@@ -70,6 +70,9 @@ class CitationRepository:
         db.session.commit()
 
     def delete_all_citations(self):
+        Book.query.delete()
+        Article.query.delete()
+        OtherCitation.query.delete()
         return_value = Citation.query.delete()
         db.session.commit()
 
