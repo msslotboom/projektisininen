@@ -1,30 +1,23 @@
 from app import db
-from models.citation import Citation
-from models.book import Book
 from models.article import Article
+from models.book import Book
 from models.othercitation import OtherCitation
-import sys
+
 
 class CitationRepository:
     def create_new_book_citation(self, book:Book):
-        db.session.add(Citation(owner_id = book.owner_id, given_id= book.given_id, type="book"))
-        db.session.commit()
         db.session.add(book)
         db.session.commit()
 
         return book
 
     def create_new_article_citation(self, article: Article):
-        db.session.add(Citation(owner_id = article.owner_id, given_id= article.given_id, type="article"))
-        db.session.commit()
         db.session.add(article)
         db.session.commit()
 
         return article
 
     def create_new_other_citation(self, other_citation: OtherCitation):
-        db.session.add(Citation(owner_id = other_citation.owner_id, given_id= other_citation.given_id, type="other"))
-        db.session.commit()
         db.session.add(other_citation)
         db.session.commit()
 
@@ -64,16 +57,14 @@ class CitationRepository:
             db.session.delete(other_obj)
             db.session.commit()
 
-        citation_obj = Citation.query.filter_by(id=citation_id).first()
-
-        db.session.delete(citation_obj)
-        db.session.commit()
 
     def delete_all_citations(self):
-        return_value = Citation.query.delete()
+        books = Book.query.delete()
+        articles = Article.query.delete()
+        other_citations = OtherCitation.query.delete()
         db.session.commit()
 
-        return return_value
+        return books + articles + other_citations
     
     def get_citation(self, citation_id):
         return Citation.query.filter_by(id=citation_id).first()

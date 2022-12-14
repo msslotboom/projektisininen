@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, request, redirect, flash
 from services.user_services import user_service
 from services.citation_services import citation_service
 from services.bibgen import bibliography_generator
+import sys
 
 main_controller = Blueprint("main_controller", __name__)
 
@@ -87,8 +88,7 @@ def handle_new_book_citation():
             year = 2031
         if (given_id == ""): #Jos ID kohta jätetty tyhjäksi, etsitään sopiva ID automaattisesti
             if not citation_service.check_duplicate_given_id(authors + title):
-                given_id = authors + title
-            # TODO
+                given_id = authors + " " + title
         citation_service.create_book_citation(int(owner_id), given_id, authors, title, editor, publisher, int(year))
         return redirect("/citations")
     except Exception as error:
@@ -112,8 +112,7 @@ def handle_new_article_citation():
             year = 2031
         if (given_id == ""): #Jos ID kohta jätetty tyhjäksi, etsitään sopiva ID automaattisesti
             if not citation_service.check_duplicate_given_id(authors + title):
-                given_id = authors + title
-            # TODO
+                given_id = authors + " " + title
         citation_service.create_article_citation(int(owner_id), given_id, authors, title, journal, int(year))
         return redirect("/citations")
     except Exception as error:
@@ -137,8 +136,7 @@ def handle_new_other_citation():
             year = 2031
         if (given_id == ""): #Jos ID kohta jätetty tyhjäksi, etsitään sopiva ID automaattisesti
             if not citation_service.check_duplicate_given_id(authors + title):
-                given_id = authors + title
-            # TODO
+                given_id = authors + " " + title
         citation_service.create_other_citation(int(owner_id), given_id, authors, title, type, other, int(year))
         return redirect("/citations")
     except Exception as error:
