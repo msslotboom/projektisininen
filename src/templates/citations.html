@@ -12,13 +12,12 @@
     <li>Annettu ID: {{ book.given_id }}</li>
 </ul>
 <form action="/delete_citation" method="POST">
-    <input type="hidden" name="citation_id" value="{{ citation.id }}">
-    <input type="hidden" name="citation_type" value="{{ citation.type }}">
+    <input type="hidden" name="given_id" value="{{ book.given_id }}">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="submit" value="poista">
 </form>
 <form action="/edit_citation" method="GET" target="_blank">
-    <input type="hidden" name="citation_id" value="{{ citation.id }}">
+    <input type="hidden" name="given_id" value="{{ book.given_id }}">
     <input type="submit" value="muokkaa">
 </form>
 
@@ -34,13 +33,12 @@
     <li>Annettu ID: {{ article.given_id }}</li>
 </ul>
 <form action="/delete_citation" method="POST">
-    <input type="hidden" name="citation_id" value="{{ citation.id }}">
-    <input type="hidden" name="citation_type" value="{{ citation.type }}">
+    <input type="hidden" name="given_id" value="{{ article.given_id }}">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="submit" value="poista">
 </form>
 <form action="/edit_citation" method="GET" target="_blank">
-    <input type="hidden" name="citation_id" value="{{ citation.id }}">
+    <input type="hidden" name="given_id" value="{{ article.given_id }}">
     <input type="submit" value="muokkaa">
 </form>
 
@@ -57,13 +55,12 @@
     <li>Annettu ID: {{ other.given_id }}</li>
 </ul>
 <form action="/delete_citation" method="POST">
-    <input type="hidden" name="citation_id" value="{{ citation.id }}">
-    <input type="hidden" name="citation_type" value="{{ citation.type }}">
+    <input type="hidden" name="given_id" value="{{ other.given_id }}">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="submit" value="poista">
 </form>
 <form action="/edit_citation" method="GET" target="_blank">
-    <input type="hidden" name="citation_id" value="{{ citation.id }}">
+    <input type="hidden" name="given_id" value="{{ other.given_id }}">
     <input type="submit" value="muokkaa">
 </form>
 

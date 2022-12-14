@@ -61,22 +61,21 @@ class CitationRepository:
         all_table_names.append(OtherCitation.__table__.columns.keys())
         return all_table_names
     
-    def delete_citation(self, citation_id, type):
-        if type == "article":
-            article_obj = Article.query.filter_by(id=citation_id).first()
-            db.session.delete(article_obj)
-            db.session.commit()
+    def delete_citation(self, given_id, owner_id):
+        for book in self.get_all_book_citations(owner_id):
+            if book.given_id == given_id:
+                db.session.delete(book)
+                db.session.commit()
 
-        elif type == "book":
-            book_obj = Book.query.filter_by(id=citation_id).first()
-            db.session.delete(book_obj)
-            db.session.commit()
+        for article in self.get_all_article_citations(owner_id):
+            if article.given_id == given_id:
+                db.session.delete(article)
+                db.session.commit()
 
-        elif type == "other":
-            other_obj = OtherCitation.query.filter_by(id=citation_id).first()
-            db.session.delete(other_obj)
-            db.session.commit()
-
+        for other in self.get_all_other_citations(owner_id):
+            if other.given_id == given_id:
+                db.session.delete(other)
+                db.session.commit()
 
     def delete_all_citations(self):
         books = Book.query.delete()
@@ -87,19 +86,15 @@ class CitationRepository:
         return books + articles + other_citations
     
     def get_citation(self, citation_id):
-        return Citation.query.filter_by(id=citation_id).first()
-
-    def find_by_given_id(self, given_id):
-<<<<<<< HEAD
-        id = Article.query.filter_by(given_id=given_id).first()
-        id += Book.query.filter_by(given_id=given_id).first()
-        id += OtherCitation.query.filter_by(given_id=given_id).first()
-        return id
-=======
-        #id = Citation.query.filter_by(given_id=given_id).first()
-        #return id
+        #return Citation.query.filter_by(id=citation_id).first()
         pass
->>>>>>> b3079b2874417d85311f9bd74efa8a66ca82ff56
+
+    def find_by_given_id(self, given_id, owner_id):
+        id = Article.query.filter_by(given_id=given_id, owner_id=owner_id).first()
+        id = Book.query.filter_by(given_id=given_id, owner_id=owner_id).first()
+        id = OtherCitation.query.filter_by(given_id=given_id, owner_id=owner_id).first()
+        return id
+
 
 
 
