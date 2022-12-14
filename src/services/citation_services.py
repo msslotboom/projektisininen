@@ -1,4 +1,3 @@
-from models.citation import Citation
 from models.book import Book
 from models.article import Article
 from models.othercitation import OtherCitation
