@@ -50,9 +50,8 @@ class CitationService:
             owner_id=owner_id, given_id=given_id, author=author, title=title, type=type, other=other, year=year
             ))
 
-    def edit_citation(self, citation_id, authors, title, year, given_id):
-        self.validate_citation(authors, title, year, given_id)
-        self._citation_repo.edit_citation(citation_id, authors, title, year, given_id)
+    def edit_other_citation(self, citation_id, given_id, authors, title, type, other, year):
+        self._citation_repo.edit_other_citation(citation_id=citation_id, given_id=given_id, author=authors, title=title, type=type, other=other, year=year)
     
     def get_article_citations(self, owner_id):
         article_citations = []
@@ -91,8 +90,8 @@ class CitationService:
         
         return column_names
     
-    def get_content_by_id(self, citation_id):
-        return self._citation_repo.get_citation(citation_id)
+    def get_content_by_id(self, given_id, owner_id):
+        return self._citation_repo.get_content_by_given_id(given_id=given_id, owner_id=owner_id)
 
     def delete_citation(self, given_id, owner_id):
         self._citation_repo.delete_citation(given_id, owner_id)

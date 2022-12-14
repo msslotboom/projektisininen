@@ -16,7 +16,7 @@
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="submit" value="poista">
 </form>
-<form action="/edit_citation" method="GET" target="_blank">
+<form action="/edit_book_citation" method="GET" target="_blank">
     <input type="hidden" name="given_id" value="{{ book.given_id }}">
     <input type="submit" value="muokkaa">
 </form>
@@ -37,7 +37,7 @@
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="submit" value="poista">
 </form>
-<form action="/edit_citation" method="GET" target="_blank">
+<form action="/edit_article_citation" method="GET" target="_blank">
     <input type="hidden" name="given_id" value="{{ article.given_id }}">
     <input type="submit" value="muokkaa">
 </form>
@@ -59,7 +59,7 @@
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="submit" value="poista">
 </form>
-<form action="/edit_citation" method="GET" target="_blank">
+<form action="/edit_other_citation" method="GET" target="_blank">
     <input type="hidden" name="given_id" value="{{ other.given_id }}">
     <input type="submit" value="muokkaa">
 </form>
