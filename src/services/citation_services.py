@@ -51,8 +51,16 @@ class CitationService:
             ))
 
     def edit_other_citation(self, citation_id, given_id, authors, title, type, other, year):
-        self._citation_repo.edit_other_citation(citation_id=citation_id, given_id=given_id, author=authors, title=title, type=type, other=other, year=year)
+        self._citation_repo.edit_other_citation(
+            citation_id=citation_id, given_id=given_id, author=authors, 
+            title=title, type=type, other=other, year=year)
     
+    def edit_book_citation(self, citation_id, given_id, authors, title, editor, publisher, year):
+        self._citation_repo.edit_book_citation(
+            citation_id=citation_id, given_id=given_id, author=authors, 
+            title=title, publisher=publisher, editor=editor, year=year)
+
+
     def get_article_citations(self, owner_id):
         article_citations = []
         for article_citation in self._citation_repo.get_all_article_citations(owner_id):
