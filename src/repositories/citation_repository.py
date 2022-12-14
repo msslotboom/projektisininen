@@ -46,7 +46,7 @@ class CitationRepository:
         return OtherCitation.query.filter_by(owner_id=user_id)
 
     def get_all_citations(self, user_id):
-<<<<<<< HEAD
+
         all_citations = []
         all_citations.append(Article.query.filter_by(owner_id=user_id))
         all_citations.append(OtherCitation.query.filter_by(owner_id=user_id))
@@ -60,14 +60,6 @@ class CitationRepository:
         all_table_names.append(Book.__table__.columns.keys())
         all_table_names.append(OtherCitation.__table__.columns.keys())
         return all_table_names
-=======
-        # return Citation.query.filter_by(owner_id=user_id)
-        pass
-    
-    def get_all_citation_table_names(self):
-        # return Citation.__table__.columns.keys()
-        pass
->>>>>>> b3079b2874417d85311f9bd74efa8a66ca82ff56
     
     def delete_citation(self, citation_id, type):
         if type == "article":
