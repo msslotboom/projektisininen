@@ -64,7 +64,7 @@ class CitationRepository:
         other_citations = OtherCitation.query.delete()
         db.session.commit()
 
-        return int(books) + int(articles) + int(other_citations)
+        return books + articles + other_citations
     
     def get_citation(self, citation_id):
         return Citation.query.filter_by(id=citation_id).first()
