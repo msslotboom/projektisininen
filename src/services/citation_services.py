@@ -59,6 +59,11 @@ class CitationService:
         self._citation_repo.edit_book_citation(
             citation_id=citation_id, given_id=given_id, author=authors, 
             title=title, publisher=publisher, editor=editor, year=year)
+    
+    def edit_article_citation(self, citation_id, given_id, authors, title, journal, year):
+        self._citation_repo.edit_article_citation(
+            citation_id=citation_id, given_id=given_id, author=authors,
+            title=title, journal=journal, year=year)
 
 
     def get_article_citations(self, owner_id):

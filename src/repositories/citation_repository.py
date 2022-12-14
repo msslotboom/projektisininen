@@ -54,6 +54,19 @@ class CitationRepository:
             update({'publisher':publisher})
         db.session.commit()
 
+    def edit_article_citation(self, citation_id, given_id, author, title, journal, year):
+        Article.query.filter_by(id=citation_id).\
+            update({'author':author})
+        Article.query.filter_by(id=citation_id).\
+            update({'title':title})
+        Article.query.filter_by(id=citation_id).\
+            update({'year':year})
+        Article.query.filter_by(id=citation_id).\
+            update({'given_id':given_id})
+        Article.query.filter_by(id=citation_id).\
+            update({'journal':journal})
+        db.session.commit()
+
     def get_all_article_citations(self, user_id):
         return Article.query.filter_by(owner_id=user_id)
 

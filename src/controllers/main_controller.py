@@ -244,6 +244,36 @@ def handle_edit_book_citation():
         flash(str(error))
         return redirect("/edit_book_citation")
 
+@main_controller.route("/edit_article_citation", methods=["GET"])
+def render_edit_article_citation():
+    try:
+        owner_id = user_service.get_session_user_id()
+        given_id = request.args.get("given_id")
+        citation = citation_service.get_content_by_id(given_id=given_id, owner_id=owner_id)
+        return render_template("edit_article_citation.html", citation=citation)
+    except Exception as error:
+        flash(str(error))
+        return redirect("/edit_article_citation")
+
+@main_controller.route("/edit_article_citation", methods=["POST"])
+def handle_edit_article_citation(): 
+    try:
+        csrf_token = request.form["csrf_token"]
+        user_service.check_csrf(csrf_token)
+        citation_id = request.form.get("citation_id")
+        authors = request.form.get("authors")
+        title = request.form.get("title")
+        journal = request.form.get("journal")
+        year = request.form.get("year")
+        given_id = request.form.get("given_id")
+        citation_service.edit_article_citation(
+            citation_id=citation_id, authors=authors, title=title, 
+            journal=journal, year=year, given_id=given_id)
+        return redirect("/citations")
+    except Exception as error:
+        flash(str(error))
+        return redirect("/edit_article_citation")
+
 
 
 @main_controller.route("/download", methods=["GET"])
