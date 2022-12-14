@@ -72,16 +72,34 @@ class CitationService:
             other_citations.append(other_citation)
         return other_citations
 
+    def get_book_citation_values(self, book):
+        return (book.given_id, book.author, book.editor, book.title, book.publisher, book.year)
+
+    def get_article_citation_values(self, article):
+        return (article.given_id, article.author, article.title, article.journal, article.year)
+
+    def get_other_citation_values(self, other):
+        return (other.given_id, other.author, other.title, other.type, other.other, other.year)
+
     def get_citations(self, owner_id):
         citations = []
         citation_query_list = self._citation_repo.get_all_citations(owner_id)
+        
 
-        for list_length in range(len(citation_query_list)):
-            for citation in citation_query_list[list_length]:
-                citations.append(citation)
+        
+        for citation in citation_query_list:
+            citations.append(citation)
         
         
         return citations
+
+    def get_citation_name(self, citation):
+        if isinstance(citation, Article):
+            return "article"
+        elif isinstance(citation, Book):
+            return "book"
+        else:
+            return "misc"
 
     def get_citations_column_names(self):
         column_names = []
