@@ -50,3 +50,12 @@ jobs:
           DATABASE_URL: postgresql://postgres:postgres@localhost/postgres
           FLASK_DEBUG: 1
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
+      - name: Enable Codecov
+        uses: codecov/codecov-action@v3.1.1
+      - name: Generate coverage report
+        run: poetry run coverage xml
+        env:
+          DATABASE_URL: postgresql://postgres:postgres@localhost/postgres
+      - name: Upload coverage report to Codecov
+        run: bash <(curl -s https://codecov.io/bash)
