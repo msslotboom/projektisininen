@@ -23,18 +23,21 @@ class CitationRepository:
 
         return other_citation
 
-    def edit_citation(self, citation_id, authors, title, year, given_id):
-        # Citation.query.filter_by(id=citation_id).\
-        #     update({'authors':authors})
-        # Citation.query.filter_by(id=citation_id).\
-        #     update({'title':title})
-        # Citation.query.filter_by(id=citation_id).\
-        #     update({'year':year})
-        # Citation.query.filter_by(id=citation_id).\
-        #     update({'given_id':given_id})
-        # db.session.commit()
-        # return self.get_citation(citation_id)
-        pass
+
+    def edit_other_citation(self, citation_id, given_id, author, title, year, other, type):
+        OtherCitation.query.filter_by(id=citation_id).\
+            update({'author':author})
+        OtherCitation.query.filter_by(id=citation_id).\
+            update({'title':title})
+        OtherCitation.query.filter_by(id=citation_id).\
+            update({'year':year})
+        OtherCitation.query.filter_by(id=citation_id).\
+            update({'given_id':given_id})
+        OtherCitation.query.filter_by(id=citation_id).\
+            update({'type':type})
+        OtherCitation.query.filter_by(id=citation_id).\
+            update({'other':other})
+        db.session.commit()
 
     def get_all_article_citations(self, user_id):
         return Article.query.filter_by(owner_id=user_id)
@@ -81,9 +84,10 @@ class CitationRepository:
 
         return books + articles + other_citations
 
-    def get_citation(self, citation_id):
-        # return Citation.query.filter_by(id=citation_id).first()
-        pass
+    def get_content_by_given_id(self, given_id, owner_id):
+        for citation in self.get_all_citations(owner_id):
+            if citation.given_id == given_id:
+                return citation
 
     def find_by_given_id(self, given_id, owner_id):
         id = Article.query.filter_by(
@@ -92,6 +96,8 @@ class CitationRepository:
         id = OtherCitation.query.filter_by(
             given_id=given_id, owner_id=owner_id).first()
         return id
+    
+
 
 
 citation_repository = CitationRepository()

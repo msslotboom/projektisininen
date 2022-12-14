@@ -182,34 +182,37 @@ def handle_delete_citation():
 
         return redirect("/citations")
 
-
-@main_controller.route("/edit_citation", methods=["GET"])
-def render_edit_citation():
+@main_controller.route("/edit_other_citation", methods=["GET"])
+def render_edit_other_citation():
     try:
-        citation_id = request.args.get("citation_id")
-        citation = citation_service.get_content_by_id(citation_id)
-        return render_template("edit_citation.html", citation=citation)
+        owner_id = user_service.get_session_user_id()
+        given_id = request.args.get("given_id")
+        citation = citation_service.get_content_by_id(given_id=given_id, owner_id=owner_id)
+        return render_template("edit_other_citation.html", citation=citation)
     except Exception as error:
         flash(str(error))
-        return redirect("/edit_citation")
+        return redirect("/edit_other_citation")
 
-
-@main_controller.route("/edit_citation", methods=["POST"])
-def handle_edit_citation():
+@main_controller.route("/edit_other_citation", methods=["POST"])
+def handle_edit_other_citation(): #WIP
     try:
         csrf_token = request.form["csrf_token"]
         user_service.check_csrf(csrf_token)
         citation_id = request.form.get("citation_id")
         authors = request.form.get("authors")
         title = request.form.get("title")
+        type = request.form.get("type")
+        other = request.form.get("other")
         year = request.form.get("year")
         given_id = request.form.get("given_id")
-        citation_service.edit_citation(
-            citation_id, authors, title, int(year), int(given_id))
+        citation_service.edit_other_citation(citation_id=citation_id,
+        given_id=given_id, authors=authors, title=title, type=type,
+        other=other, year=year)
         return redirect("/citations")
     except Exception as error:
         flash(str(error))
-        return redirect("/edit_citation")
+        return redirect("/edit_other_citation")
+
 
 
 @main_controller.route("/download", methods=["GET"])
