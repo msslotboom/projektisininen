@@ -1,9 +1,9 @@
 import unittest
-from repositories.user_repository import user_repository
+
+from models.book import Book
 from models.user import User
 from repositories.citation_repository import citation_repository
-from models.citation import Citation
-from models.book import Book
+from repositories.user_repository import user_repository
 
 
 class TestCitationRepository(unittest.TestCase):

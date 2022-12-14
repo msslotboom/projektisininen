@@ -1,9 +1,9 @@
 from app import db
-from models.citation import Citation
-from models.book import Book
 from models.article import Article
+from models.book import Book
+from models.citation import Citation
 from models.othercitation import OtherCitation
-import sys
+
 
 class CitationRepository:
     def create_new_book_citation(self, book:Book):
