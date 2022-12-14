@@ -8,8 +8,8 @@ Test Setup  Create User And Login
 
 
 *** Test Cases ***
-Create A New Citation With Valid Arguments
-    Go To New Citation Page
+Create A New Book Citation With Valid Arguments
+    Go To New Book Citation Page
     Set Authors  Kirjoittaja
     Set Title  Otsikko
     Set Year  1234
@@ -17,27 +17,27 @@ Create A New Citation With Valid Arguments
     References Page Should Be Open
 
 Create A New Citation Without Authors
-    Go To New Citation Page
+    Go To New Book Citation Page
     Set Title  Otsikko
     Set Year  1234
     Click Button  Luo viite
     Creation Should Fail With Message  Viitteestä puuttuu tietoja
 
 Create A New Citation Without Title
-    Go To New Citation Page
+    Go To New Book Citation Page
     Set Authors  Kirjoittaja
     Set Year  1234
     Click Button  Luo viite
     Creation Should Fail With Message  Viitteestä puuttuu tietoja
 
 Create A New Citation With Already Used ID
-    Go To New Citation Page
+    Go To New Book Citation Page
     Set Authors  Kirjoittaja
     Set Title  Otsikko
     Set Year  1234
     Set ID  1
     Click Button  Luo viite
-    Go To New Citation Page
+    Go To New Book Citation Page
     Set Authors  Kirjoittaja2
     Set Title  Otsikko2
     Set Year  1235

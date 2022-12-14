@@ -2,6 +2,7 @@
 Library  SeleniumLibrary
 Library  AppLibrary.py
 Library  OperatingSystem
+Library  BuiltIn
 
 *** Variables ***
 ${SERVER}  localhost:5000
@@ -30,6 +31,21 @@ Go To References Page
 
 Go To New Citation Page
     Go To  ${NEW CITATION URL}
+
+Go To New Book Citation Page
+    Go To  ${NEW CITATION URL}
+    Select From List locator:id=dropdown  value=book
+    Click Button  Valitse viite
+
+Go To New Article Citation Page
+    Go To  ${NEW CITATION URL}
+    Select From List locator:id=dropdown  value=article
+    Click Button  Valitse viite
+
+Go To New Other Citation Page
+    Go To  ${NEW CITATION URL}
+    Select From List locator:id=dropdown  value=other
+    Click Button  Valitse viite
 
 Main Page Should Be Open
     Location Should Be  ${HOME URL}
