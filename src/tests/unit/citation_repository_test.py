@@ -51,28 +51,47 @@ class TestCitationRepository(unittest.TestCase):
             poistettava.given_id, self.omistaja_id)
         self.assertEqual(
             len(citation_repository.get_all_citations(self.omistaja_id)), 0)
-
-    def test_edit_citation(self):
-        omistaja_id = 1
-        viite = citation_repository.create_new_citation(Citation(owner_id=omistaja_id, 
-        authors="Einstein", title="kirja", year=1905, given_id = 1))  
-        
-        viite_id = viite.id
-        u_viite = citation_repository.edit_citation(viite_id, "Hawking", "parempi kirja", 2002, 2)
-        self.assertEqual(u_viite.authors, "Hawking")
-        self.assertEqual(u_viite.title, "parempi kirja")
-        self.assertEqual(u_viite.year, 2002)
-        self.assertEqual(u_viite.given_id, 2)
     
     def test_edit_other_citation(self):
-        viite = citation_repository.create_new_other_citation(OtherCitation(
-            owner_id=1, given_id=1, author="author", title="title", type="type", other="other", year=2021
-        ))
-        uusi_viite = citation_repository.edit_other_citation(
-            citation_id=viite.id, given_id=2, author="author2", title="title2", type="type2", other="other2", year=2022
-        )
+        given_id=1
+
+        muuviite = OtherCitation(owner_id=self.omistaja_id, given_id=given_id, author="author", title="title", type="type", other="other", year=2021)
+
+        viite = citation_repository.create_new_other_citation(muuviite)
+        citation_repository.edit_other_citation(
+            citation_id=viite.id, given_id=2, author="author2", title="title2", type="type2", other="other2", year=2022)
+        uusi_viite = citation_repository.get_content_by_given_id(owner_id=self.omistaja_id, given_id=2)
+
         self.assertEqual(uusi_viite.author, "author2")
-        self.assertNotEqual(uusi_viite.title, "title")
+        self.assertEqual(uusi_viite.title, "title2")
+        self.assertEqual(uusi_viite.type, "type2")
+        self.assertEqual(uusi_viite.other, "other2")
+        self.assertEqual(uusi_viite.year, 2022)
+    
+    def test_edit_book_and_article(self):
+        kirja = Book(
+            owner_id=self.omistaja_id, given_id=2, author="author", title="title", editor="editor", publisher="publisher", year=2022
+            )
+        artikkeli = Article(
+            owner_id=self.omistaja_id, given_id=1, author="author", title="title", journal="journal", year=2022
+            )
+
+        kirjaviite = citation_repository.create_new_book_citation(kirja)
+        artikkeliviite = citation_repository.create_new_article_citation(artikkeli)
+
+        citation_repository.edit_article_citation(
+            citation_id=kirjaviite.id, given_id=1, author="author", title="title", journal="journal2", year=2022)
+        citation_repository.edit_book_citation(
+            citation_id=artikkeliviite.id, given_id=2, author="author", title="title", editor="editor2", publisher="publisher2", year=2022
+        )
+        u_artikkeli = citation_repository.get_content_by_given_id(owner_id=self.omistaja_id, given_id=1)
+        u_kirja = citation_repository.get_content_by_given_id(owner_id=self.omistaja_id, given_id=2)
+
+        self.assertEqual(u_artikkeli.journal, "journal2")
+        self.assertEqual(u_kirja.editor, "editor2")
+        self.assertEqual(u_kirja.publisher, "publisher2")
+        
+
     def test_delete_one_book_citation_of_two(self):
         poistettava = citation_repository.create_new_book_citation(
             Book(owner_id=self.omistaja_id, given_id="Stephen_Hawking_A_Brief_History_Of_Time", author="Stephen Hawking", editor="Unknown", title="A Brief History of Time", publisher="Unknown", year=1988))

@@ -114,7 +114,7 @@ class CitationRepository:
 
     def get_content_by_given_id(self, given_id, owner_id):
         for citation in self.get_all_citations(owner_id):
-            if citation.given_id == given_id:
+            if str(citation.given_id) == str(given_id):
                 return citation
 
     def find_by_given_id(self, given_id, owner_id):
