@@ -13,6 +13,7 @@ ${LOGIN URL}  http://${SERVER}/login
 ${REGISTER URL}  http://${SERVER}/register
 ${REFERENCES URL}  http://${SERVER}/citations
 ${NEW CITATION URL}  http://${SERVER}/new_citation
+${NEW BOOK URL}  http://${SERVER}/new_book
 
 *** Keywords ***
 Open And Configure Browser
@@ -27,24 +28,24 @@ Go To Registration Page
     Go To  ${REGISTER URL}
 
 Go To References Page
-    Go To  ${References URL}
+    Go To  ${REFERENCES URL}
 
 Go To New Citation Page
     Go To  ${NEW CITATION URL}
 
 Go To New Book Citation Page
     Go To  ${NEW CITATION URL}
-    Select From List locator:id=dropdown  value=book
+    Select From List By Label  dropdown  Kirja
     Click Button  Valitse viite
 
 Go To New Article Citation Page
     Go To  ${NEW CITATION URL}
-    Select From List locator:id=dropdown  value=article
+    Select From List By Label  dropdown  Artikkeli
     Click Button  Valitse viite
 
 Go To New Other Citation Page
     Go To  ${NEW CITATION URL}
-    Select From List locator:id=dropdown  value=other
+    Select From List By Label  dropdown  Muu
     Click Button  Valitse viite
 
 Main Page Should Be Open
@@ -61,3 +62,6 @@ New Citation Page Should Be Open
 
 References Page Should Be Open
     Location Should Be  ${REFERENCES URL}
+    
+New Book Page Should Be Open
+    Location Should Be  ${NEW BOOK URL}

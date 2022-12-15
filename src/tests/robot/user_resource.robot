@@ -58,10 +58,3 @@ Create User And Login
     Set Password  salasana1
     Click Button  Kirjaudu sisään
     Main Page Should Be Open
-
-Create Valid Sitation
-    Go To New Citation Page
-    Set Authors  Kirjoittaja
-    Set Title  Otsikko
-    Set Year  1234
-    Click Button  Luo viite
