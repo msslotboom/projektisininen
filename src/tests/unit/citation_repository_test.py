@@ -32,7 +32,7 @@ class TestCitationRepository(unittest.TestCase):
 
     def test_create_new_other_citation(self):
         citation_repository.create_new_other_citation(OtherCitation(
-            owner_id=self.omistaja_id, given_id="Author_Title", author="Author", title="Title", type="Type", other="Other", year=1111))
+            owner_id=self.omistaja_id, given_id="Author_Title", author="Author", title="Title", type="Type", note="Note", year=1111))
         self.assertEqual(
             len(citation_repository.get_all_citations(self.omistaja_id)), 1)
 
@@ -64,15 +64,15 @@ class TestCitationRepository(unittest.TestCase):
             len(citation_repository.get_all_citations(self.omistaja_id)), 1)
 
     def test_edit_other_citation(self):
-        viite = citation_repository.create_new_other_citation(OtherCitation(owner_id=self.omistaja_id, given_id=1,
-                                                                            author="author", title="title", type="type", other="other", year=2021))
+        viite = citation_repository.create_new_other_citation(OtherCitation(owner_id=self.omistaja_id, given_id="myothercitation",
+                                                                            author="author", title="title", type="type", note="note", year=2021))
         citation_repository.edit_other_citation(
-            citation_id=viite.id, given_id=2, author="author2", title="title2", type="type2", other="other2", year=2022)
+            citation_id=viite.id, author="author2", title="title2", type="type2", note="note2", year=2022)
 
         self.assertEqual(viite.author, "author2")
         self.assertEqual(viite.title, "title2")
         self.assertEqual(viite.type, "type2")
-        self.assertEqual(viite.other, "other2")
+        self.assertEqual(viite.note, "note2")
         self.assertEqual(viite.year, 2022)
 
     def test_edit_book_and_article(self):
@@ -84,10 +84,10 @@ class TestCitationRepository(unittest.TestCase):
         ))
 
         citation_repository.edit_book_citation(
-            citation_id=kirja.id, given_id="kirja", author="author", title="title", editor="editor2", publisher="publisher2", year=2022
+            citation_id=kirja.id, author="author", title="title", editor="editor2", publisher="publisher2", year=2022
         )
         citation_repository.edit_article_citation(
-            citation_id=artikkeli.id, given_id="artikkeli", author="author", title="title", journal="journal2", year=2022)
+            citation_id=artikkeli.id, author="author", title="title", journal="journal2", year=2022)
 
         self.assertEqual(artikkeli.journal, "journal2")
         self.assertEqual(kirja.editor, "editor2")

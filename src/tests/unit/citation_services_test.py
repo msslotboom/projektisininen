@@ -67,7 +67,7 @@ class TestCitationService(unittest.TestCase):
         user_id = self.user_repo.get_id("Eemeli")
         self.citation_service.create_article_citation(user_id, "1", "Author", "Title", "Journal", 1969)
         self.citation_service.create_book_citation(user_id, "2", "Book Author", "Book Title", "Book Editor", "Book Publisher", 2000)
-        self.citation_service.create_other_citation(user_id, "3", "Other Author", "Other Title", "Type", "Other", 1999)
+        self.citation_service.create_other_citation(user_id, "3", "Other Author", "Other Title", "Type", "Note", 1999)
         self.assertEqual(len(self.citation_service.get_citations(user_id)), 3)
         self.assertEqual(len(self.citation_service.get_article_citations(user_id)), 1)
         self.assertEqual(len(self.citation_service.get_book_citations(user_id)), 1)
