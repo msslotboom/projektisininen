@@ -103,8 +103,10 @@ class CitationService:
             return "article"
         elif isinstance(citation, Book):
             return "book"
-        else:
+        elif isinstance(citation, OtherCitation):
             return "misc"
+        else:
+            return None
 
     def get_citations_column_names(self):
         column_names = []
