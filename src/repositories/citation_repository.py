@@ -120,7 +120,11 @@ class CitationRepository:
     def find_by_given_id(self, given_id, owner_id):
         id = Article.query.filter_by(
             given_id=given_id, owner_id=owner_id).first()
+        if (id is not None):
+            return id
         id = Book.query.filter_by(given_id=given_id, owner_id=owner_id).first()
+        if (id is not None):
+            return id
         id = OtherCitation.query.filter_by(
             given_id=given_id, owner_id=owner_id).first()
         return id
