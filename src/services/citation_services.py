@@ -124,7 +124,7 @@ class CitationService:
         self._citation_repo.delete_citation(given_id, owner_id)
 
     def delete_all_citations(self):
-        return self._citation_repo.delete_all_citations()
+        self._citation_repo.delete_all_citations()
 
 
 citation_service = CitationService()

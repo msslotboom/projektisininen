@@ -2,7 +2,6 @@
 Library  SeleniumLibrary
 Library  AppLibrary.py
 Library  OperatingSystem
-Library  BuiltIn
 
 *** Variables ***
 ${SERVER}  localhost:5000
@@ -18,7 +17,7 @@ ${NEW BOOK URL}  http://${SERVER}/new_book
 *** Keywords ***
 Open And Configure Browser
     Open Browser  browser=${BROWSER}
-    Set Window Size  800  600
+    Set Window Size  1600  900
     Set Selenium Speed  ${DELAY}
 
 Go To Login Page

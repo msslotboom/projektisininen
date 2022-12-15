@@ -34,9 +34,9 @@ Set Type
     [Arguments]  ${type}
     Input Text  type  ${type}
 
-Set Other
-    [Arguments]  ${other}
-    Input Text  other  ${other}
+Set Note
+    [Arguments]  ${note}
+    Input Text  note  ${note}
 
 Set Year
     [Arguments]  ${year}

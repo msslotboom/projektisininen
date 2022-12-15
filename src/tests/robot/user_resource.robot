@@ -58,3 +58,12 @@ Create User And Login
     Set Password  salasana1
     Click Button  Kirjaudu sisään
     Main Page Should Be Open
+
+Reset Application, Create User And Login
+    Reset Application
+    Create User  Paavo2  salasana1
+    Go To Login Page
+    Set Username  Paavo2
+    Set Password  salasana1
+    Click Button  Kirjaudu sisään
+    Main Page Should Be Open

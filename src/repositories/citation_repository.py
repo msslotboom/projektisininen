@@ -98,12 +98,10 @@ class CitationRepository:
                 db.session.commit()
 
     def delete_all_citations(self):
-        books = Book.query.delete()
-        articles = Article.query.delete()
-        other_citations = OtherCitation.query.delete()
+        Book.query.delete()
+        Article.query.delete()
+        OtherCitation.query.delete()
         db.session.commit()
-
-        return books + articles + other_citations
 
     def get_content_by_given_id(self, given_id, owner_id):
         for citation in self.get_all_citations(owner_id):

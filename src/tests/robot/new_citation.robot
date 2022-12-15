@@ -4,7 +4,7 @@ Resource  user_resource.robot
 Resource  citation_resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
-Test Setup  Create User And Login
+Test Setup  Reset Application, Create User And Login
 
 
 *** Test Cases ***
@@ -32,7 +32,7 @@ Create Valid Other Citation With Valid Arguments
     Set Authors  Kirjoittaja
     Set Title  Otsikko
     Set Type  Muu
-    Set Other  None
+    Set Note  None
     Set Year  1238
     Click Button  Luo viite
     References Page Should Be Open
