@@ -11,9 +11,6 @@ class TestBibgen(unittest.TestCase):
 
     def test_generate_empty_text_from_empty_repository(self):
         result = self.bibgen.generate_bib_text(1)
-        print("heui")
-        print(result)
-        print("jaa")
         self.assertEqual("", result)
 
     def test_converting_from_database_results_to_appropriate_variables(self):

@@ -21,7 +21,7 @@ class Bibgen:
         for item in range(len(citation_list)):
             for column in range(len(reordered_citation_list[item])):
                 if column == 0:
-                    bib_as_text += f'@{self._citations.get_citation_name(item)}' + '{' + f'{reordered_citation_list[item][column]},\n'
+                    bib_as_text += f'@{self._citations.get_citation_name(citation_list[item])}' + '{' + f'{reordered_citation_list[item][column]},\n'
                 elif column + 1 == len(reordered_citation_list[item]):
                     bib_as_text += f'{converted_columns[item][column]} = ' + "{" + f'{reordered_citation_list[item][column]}' + "}\n}"
                 else:
