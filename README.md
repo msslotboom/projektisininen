@@ -17,7 +17,11 @@
 
 ### Asennus
 1. Asenna PostgreSQL
+    (ohjeita [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-22-04-quickstart)  tai [postgresql oma dokumentaatio](https://www.postgresql.org/docs/current/installation.html))
 2. Asenna riippuvuudet
+
+    ```poetry install```
+
 3. Luo projektin juureen tiedosto nimeltä `.env`, johon määrittelet PostgreSQL-tietokannan osoitteen `DATABASE_URL=postgresql:///tietokannan_nimi_tähän`. Tietokannan osoitteen muodostumisesta lisää [täällä](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING)
 4. Lisää `.env` tiedostoon myös generoitu `SECRET_KEY` ja `FLASK_DEBUG=1`
 5. Alusta tietokanta ajamalla tiedosto `initialize_db.py`
@@ -28,3 +32,5 @@ Testeille kannattaa tehdä oma tietokanta. Tee projektin juureen tiedosto `.env.
 
 ### Robot-testit
 Robot-testien suorittamista varten avaa sovellus toisessa terminaalissa komennolla `dotenv -f .env.test run -- python3 src/start.py`. Sen jälkeen testit voi ajaa normaalisti komennolla `robot src/tests/robot`.
+
+
