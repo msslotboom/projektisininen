@@ -23,7 +23,7 @@ class CitationRepository:
 
         return other_citation
 
-    def edit_other_citation(self, citation_id, author, title, year, other, type):
+    def edit_other_citation(self, citation_id, author, title, year, note, type):
         OtherCitation.query.filter_by(id=citation_id).\
             update({'author': author})
         OtherCitation.query.filter_by(id=citation_id).\
@@ -33,7 +33,7 @@ class CitationRepository:
         OtherCitation.query.filter_by(id=citation_id).\
             update({'type': type})
         OtherCitation.query.filter_by(id=citation_id).\
-            update({'other': other})
+            update({'note': note})
         db.session.commit()
 
     def edit_book_citation(self, citation_id, author, title, editor, publisher, year):

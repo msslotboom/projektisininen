@@ -44,17 +44,17 @@ class CitationService:
             owner_id=owner_id, given_id=given_id, author=author, title=title, journal=journal, year=year
         ))
 
-    def create_other_citation(self, owner_id, given_id, author, title, type, other, year):
+    def create_other_citation(self, owner_id, given_id, author, title, type, note, year):
         self.validate_citation(author, title, year, given_id, owner_id)
 
         return self._citation_repo.create_new_other_citation(OtherCitation(
-            owner_id=owner_id, given_id=given_id, author=author, title=title, type=type, other=other, year=year
+            owner_id=owner_id, given_id=given_id, author=author, title=title, type=type, note=note, year=year
         ))
 
-    def edit_other_citation(self, citation_id, authors, title, type, other, year):
+    def edit_other_citation(self, citation_id, authors, title, type, note, year):
         self._citation_repo.edit_other_citation(
             citation_id=citation_id, author=authors,
-            title=title, type=type, other=other, year=year)
+            title=title, type=type, note=note, year=year)
 
     def edit_book_citation(self, citation_id, authors, title, editor, publisher, year):
         self._citation_repo.edit_book_citation(
@@ -91,7 +91,7 @@ class CitationService:
         return (article.given_id, article.author, article.title, article.journal, article.year)
 
     def get_other_citation_values(self, other):
-        return (other.given_id, other.author, other.title, other.type, other.other, other.year)
+        return (other.given_id, other.author, other.title, other.type, other.note, other.year)
 
     def get_citations(self, owner_id):
         citations = []

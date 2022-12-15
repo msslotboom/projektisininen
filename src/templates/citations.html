@@ -50,7 +50,7 @@
     <li>Kirjoittajat: {{ other.author }}</li>
     <li>Otsikko: {{ other.title }}</li>
     <li>Viitteen Tyyppi: {{ other.type }}</li>
-    <li>Muita tietoja: {{ other.other }}</li>
+    <li>Muita tietoja: {{ other.note }}</li>
     <li>Vuosi: {{ other.year }}</li>
     <li>Annettu ID: {{ other.given_id }}</li>
 </ul>
@@ -67,6 +67,10 @@
 
 {% endfor %}
 
-<a href="/download" download="bibliography.bib">Lataa</a>
+<br>
+<a href="/new_citation">Luo uusi viite</a>
+<br>
+<a href="/download" download="bibliography.bib">Lataa viitetiedosto</a>
+<br>
 
 <a href="/">Takaisin</a>

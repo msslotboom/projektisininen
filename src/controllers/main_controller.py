@@ -138,7 +138,7 @@ def handle_new_other_citation():
         authors = request.form.get("authors")
         title = request.form.get("title")
         type = request.form.get("type")
-        other = request.form.get("other")
+        note = request.form.get("note")
         given_id = request.form.get("given_id")
         year = request.form.get("year")
         if (year == ""):  # Antaa muuten virheellisen error messagen, citation_servicen validointi kohdassa or not year ei toimi
@@ -148,7 +148,7 @@ def handle_new_other_citation():
             given_id = citation_service.generate_given_id(authors, year)
 
         citation_service.create_other_citation(
-            int(owner_id), given_id, authors, title, type, other, int(year))
+            int(owner_id), given_id, authors, title, type, note, int(year))
         return redirect("/citations")
     except Exception as error:
         print(error, file=sys.stdout)
@@ -205,11 +205,11 @@ def handle_edit_other_citation():
         authors = request.form.get("authors")
         title = request.form.get("title")
         type = request.form.get("type")
-        other = request.form.get("other")
+        note = request.form.get("note")
         year = request.form.get("year")
         citation_service.edit_other_citation(
             citation_id=citation_id, authors=authors, title=title, type=type,
-            other=other, year=year)
+            note=note, year=year)
         return redirect("/citations")
     except Exception as error:
         flash(str(error))

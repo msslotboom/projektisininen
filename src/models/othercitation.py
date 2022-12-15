@@ -8,5 +8,5 @@ class OtherCitation(db.Model):
     author = db.Column(db.Text)
     title = db.Column(db.Text)
     type = db.Column(db.Text)
-    other = db.Column(db.Text)
+    note = db.Column(db.Text)
     year = db.Column(db.Integer)
