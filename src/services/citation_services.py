@@ -22,7 +22,7 @@ class CitationService:
             raise UserInputError("Annettu ID on jo käytössä")
 
     def generate_given_id(self, authors, year):
-        return authors.replace(" ", "_") + str(year)
+        return authors.split(",")[0].replace(" ", "_") + str(year)
 
     def check_duplicate_given_id(self, given_id, owner_id):
         return self._citation_repo.find_by_given_id(given_id, owner_id) is not None
