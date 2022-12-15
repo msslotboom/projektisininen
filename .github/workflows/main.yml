@@ -33,9 +33,15 @@ jobs:
         run: poetry install
       
       - name: Run unit tests
-        run: poetry run pytest src
+        run: poetry run coverage run --branch -m pytest src
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost/postgres
+          
+      - name: Generate coverage report
+        run: poetry run coverage xml
+        
+      - name: Upload coverage report to Codecov
+        run: bash <(curl -s https://codecov.io/bash)
           
       - name: Setup chromedriver
         uses: nanasess/setup-chromedriver@master
@@ -51,11 +57,4 @@ jobs:
           FLASK_DEBUG: 1
           SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
-      - name: Enable Codecov
-        uses: codecov/codecov-action@v3.1.1
-      - name: Generate coverage report
-        run: poetry run coverage xml
-        env:
-          DATABASE_URL: postgresql://postgres:postgres@localhost/postgres
-      - name: Upload coverage report to Codecov
-        run: bash <(curl -s https://codecov.io/bash)
+
