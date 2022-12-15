@@ -36,10 +36,6 @@
     <textarea name="year" rows="0" cols="50" placeholder="Vuosi">{{ citation.year }}</textarea>
   </div>
 
-  <div>
-    <label for="given_id"></label> <br />
-    <textarea name="given_id" rows="0" cols="50" placeholder="ID">{{ citation.given_id }}</textarea>
-
   <button>Muokkaa!</button>
 
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
