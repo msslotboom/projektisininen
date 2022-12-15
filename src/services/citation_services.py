@@ -25,11 +25,7 @@ class CitationService:
         return authors.replace(" ", "_") + str(year)
 
     def check_duplicate_given_id(self, given_id, owner_id):
-        id = self._citation_repo.find_by_given_id(given_id, owner_id)
-        if (id is not None):
-            return True
-        else:
-            return False
+        return self._citation_repo.find_by_given_id(given_id, owner_id) is not None
 
     def create_book_citation(self, owner_id, given_id, author, title, editor, publisher, year):
         self.validate_citation(author, title, year, given_id, owner_id)
