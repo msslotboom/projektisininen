@@ -2,26 +2,75 @@
 
 <h1>Viitteet</h1>
 
-{% for citation in citations %}
+{% for book in books %}
 <ul>
-    <li>Kirjoittajat: {{ citation.authors }}</li>
-    <li>Otsikko: {{ citation.title }}</li>
-    <li>Vuosi: {{ citation.year }}</li>
-    <li>ID: {{ citation.given_id }}</li>
+    <li>Kirjoittajat: {{ book.author }}</li>
+    <li>Editori: {{ book.editor }}</li>
+    <li>Otsikko: {{ book.title }}</li>
+    <li>Julkaisija: {{ book.publisher }}</li>
+    <li>Vuosi: {{ book.year }}</li>
+    <li>Annettu ID: {{ book.given_id }}</li>
 </ul>
 <form action="/delete_citation" method="POST">
-    <input type="hidden" name="citation_id" value="{{ citation.id }}">
+    <input type="hidden" name="given_id" value="{{ book.given_id }}">
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="submit" value="poista">
 </form>
-<form action="/edit_citation" method="GET" target="_blank">
-    <input type="hidden" name="citation_id" value="{{ citation.id }}">
+<form action="/edit_book_citation" method="GET" target="_blank">
+    <input type="hidden" name="given_id" value="{{ book.given_id }}">
     <input type="submit" value="muokkaa">
 </form>
 
 
 {% endfor %}
 
-<a href="/download" download="bibliography.bib">Lataa</a>
+{% for article in articles %}
+<ul>
+    <li>Kirjoittajat: {{ article.author }}</li>
+    <li>Otsikko: {{ article.title }}</li>
+    <li>Vuosi: {{ article.year }}</li>
+    <li>Lehti: {{ article.journal }}</li>
+    <li>Annettu ID: {{ article.given_id }}</li>
+</ul>
+<form action="/delete_citation" method="POST">
+    <input type="hidden" name="given_id" value="{{ article.given_id }}">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <input type="submit" value="poista">
+</form>
+<form action="/edit_article_citation" method="GET" target="_blank">
+    <input type="hidden" name="given_id" value="{{ article.given_id }}">
+    <input type="submit" value="muokkaa">
+</form>
+
+
+{% endfor %}
+
+{% for other in others %}
+<ul>
+    <li>Kirjoittajat: {{ other.author }}</li>
+    <li>Otsikko: {{ other.title }}</li>
+    <li>Viitteen Tyyppi: {{ other.type }}</li>
+    <li>Muita tietoja: {{ other.note }}</li>
+    <li>Vuosi: {{ other.year }}</li>
+    <li>Annettu ID: {{ other.given_id }}</li>
+</ul>
+<form action="/delete_citation" method="POST">
+    <input type="hidden" name="given_id" value="{{ other.given_id }}">
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+    <input type="submit" value="poista">
+</form>
+<form action="/edit_other_citation" method="GET" target="_blank">
+    <input type="hidden" name="given_id" value="{{ other.given_id }}">
+    <input type="submit" value="muokkaa">
+</form>
+
+
+{% endfor %}
+
+<br>
+<a href="/new_citation">Luo uusi viite</a>
+<br>
+<a href="/download" download="bibliography.bib">Lataa viitetiedosto</a>
+<br>
 
 <a href="/">Takaisin</a>

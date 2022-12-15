@@ -1,0 +1,43 @@
+<title>Muokkaa viitettä</title>
+
+<h1>Muokkaa Viitettä</h1>
+
+<form action="/edit_book_citation" method="post">
+  {% with messages = get_flashed_messages() %} {% if messages %}
+  <ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %} {% endwith %}
+
+  <div>
+    <label for="authors">Kirjottaja(t)</label> <br />
+    <textarea name="authors" rows="0" cols="50" placeholder="Kirjoittaja(t)">{{ citation.author }}</textarea>
+  </div>
+
+  <div>
+    <label for="title">Nimi</label> <br />
+    <textarea name="title" rows="0" cols="50" placeholder="Nimi">{{ citation.title }}</textarea>
+  </div>
+
+  <div>
+    <label for="editor">Tyyppi</label> <br />
+    <textarea name="editor" rows="0" cols="50" placeholder="Kustannustoimittaja">{{ citation.editor }}</textarea>
+  </div>
+
+  <div>
+    <label for="publisher">Muita tietoja</label> <br />
+    <textarea name="publisher" rows="0" cols="50" placeholder="Kustantaja">{{ citation.publisher }}</textarea>
+  </div>
+
+  <div>
+    <label for="year">Vuosi</label> <br />
+    <textarea name="year" rows="0" cols="50" placeholder="Vuosi">{{ citation.year }}</textarea>
+  </div>
+
+  <button>Muokkaa!</button>
+
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
+  <input type="hidden" name="citation_id" value="{{ citation.id }}" />
+</form>
