@@ -23,48 +23,41 @@ class CitationRepository:
 
         return other_citation
 
-
-    def edit_other_citation(self, citation_id, given_id, author, title, year, other, type):
+    def edit_other_citation(self, citation_id, author, title, year, note, type):
         OtherCitation.query.filter_by(id=citation_id).\
-            update({'author':author})
+            update({'author': author})
         OtherCitation.query.filter_by(id=citation_id).\
-            update({'title':title})
+            update({'title': title})
         OtherCitation.query.filter_by(id=citation_id).\
-            update({'year':year})
+            update({'year': year})
         OtherCitation.query.filter_by(id=citation_id).\
-            update({'given_id':given_id})
+            update({'type': type})
         OtherCitation.query.filter_by(id=citation_id).\
-            update({'type':type})
-        OtherCitation.query.filter_by(id=citation_id).\
-            update({'other':other})
+            update({'note': note})
         db.session.commit()
 
-    def edit_book_citation(self, citation_id, given_id, author, title, editor, publisher, year):
+    def edit_book_citation(self, citation_id, author, title, editor, publisher, year):
         Book.query.filter_by(id=citation_id).\
-            update({'author':author})
+            update({'author': author})
         Book.query.filter_by(id=citation_id).\
-            update({'title':title})
+            update({'title': title})
         Book.query.filter_by(id=citation_id).\
-            update({'year':year})
+            update({'year': year})
         Book.query.filter_by(id=citation_id).\
-            update({'given_id':given_id})
+            update({'editor': editor})
         Book.query.filter_by(id=citation_id).\
-            update({'editor':editor})
-        Book.query.filter_by(id=citation_id).\
-            update({'publisher':publisher})
+            update({'publisher': publisher})
         db.session.commit()
 
-    def edit_article_citation(self, citation_id, given_id, author, title, journal, year):
+    def edit_article_citation(self, citation_id, author, title, journal, year):
         Article.query.filter_by(id=citation_id).\
-            update({'author':author})
+            update({'author': author})
         Article.query.filter_by(id=citation_id).\
-            update({'title':title})
+            update({'title': title})
         Article.query.filter_by(id=citation_id).\
-            update({'year':year})
+            update({'year': year})
         Article.query.filter_by(id=citation_id).\
-            update({'given_id':given_id})
-        Article.query.filter_by(id=citation_id).\
-            update({'journal':journal})
+            update({'journal': journal})
         db.session.commit()
 
     def get_all_article_citations(self, user_id):
@@ -105,27 +98,27 @@ class CitationRepository:
                 db.session.commit()
 
     def delete_all_citations(self):
-        books = Book.query.delete()
-        articles = Article.query.delete()
-        other_citations = OtherCitation.query.delete()
+        Book.query.delete()
+        Article.query.delete()
+        OtherCitation.query.delete()
         db.session.commit()
-
-        return books + articles + other_citations
 
     def get_content_by_given_id(self, given_id, owner_id):
         for citation in self.get_all_citations(owner_id):
-            if citation.given_id == given_id:
+            if str(citation.given_id) == str(given_id):
                 return citation
 
     def find_by_given_id(self, given_id, owner_id):
         id = Article.query.filter_by(
             given_id=given_id, owner_id=owner_id).first()
+        if (id is not None):
+            return id
         id = Book.query.filter_by(given_id=given_id, owner_id=owner_id).first()
+        if (id is not None):
+            return id
         id = OtherCitation.query.filter_by(
             given_id=given_id, owner_id=owner_id).first()
         return id
-    
-
 
 
 citation_repository = CitationRepository()

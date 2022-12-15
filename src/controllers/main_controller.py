@@ -138,7 +138,7 @@ def handle_new_other_citation():
         authors = request.form.get("authors")
         title = request.form.get("title")
         type = request.form.get("type")
-        other = request.form.get("other")
+        note = request.form.get("note")
         given_id = request.form.get("given_id")
         year = request.form.get("year")
         if (year == ""):  # Antaa muuten virheellisen error messagen, citation_servicen validointi kohdassa or not year ei toimi
@@ -148,7 +148,7 @@ def handle_new_other_citation():
             given_id = citation_service.generate_given_id(authors, year)
 
         citation_service.create_other_citation(
-            int(owner_id), given_id, authors, title, type, other, int(year))
+            int(owner_id), given_id, authors, title, type, note, int(year))
         return redirect("/citations")
     except Exception as error:
         print(error, file=sys.stdout)
@@ -182,19 +182,22 @@ def handle_delete_citation():
 
         return redirect("/citations")
 
+
 @main_controller.route("/edit_other_citation", methods=["GET"])
 def render_edit_other_citation():
     try:
         owner_id = user_service.get_session_user_id()
         given_id = request.args.get("given_id")
-        citation = citation_service.get_content_by_id(given_id=given_id, owner_id=owner_id)
+        citation = citation_service.get_content_by_id(
+            given_id=given_id, owner_id=owner_id)
         return render_template("edit_other_citation.html", citation=citation)
     except Exception as error:
         flash(str(error))
         return redirect("/edit_other_citation")
 
+
 @main_controller.route("/edit_other_citation", methods=["POST"])
-def handle_edit_other_citation(): 
+def handle_edit_other_citation():
     try:
         csrf_token = request.form["csrf_token"]
         user_service.check_csrf(csrf_token)
@@ -202,30 +205,32 @@ def handle_edit_other_citation():
         authors = request.form.get("authors")
         title = request.form.get("title")
         type = request.form.get("type")
-        other = request.form.get("other")
+        note = request.form.get("note")
         year = request.form.get("year")
-        given_id = request.form.get("given_id")
-        citation_service.edit_other_citation(citation_id=citation_id,
-        given_id=given_id, authors=authors, title=title, type=type,
-        other=other, year=year)
+        citation_service.edit_other_citation(
+            citation_id=citation_id, authors=authors, title=title, type=type,
+            note=note, year=year)
         return redirect("/citations")
     except Exception as error:
         flash(str(error))
         return redirect("/edit_other_citation")
+
 
 @main_controller.route("/edit_book_citation", methods=["GET"])
 def render_edit_book_citation():
     try:
         owner_id = user_service.get_session_user_id()
         given_id = request.args.get("given_id")
-        citation = citation_service.get_content_by_id(given_id=given_id, owner_id=owner_id)
+        citation = citation_service.get_content_by_id(
+            given_id=given_id, owner_id=owner_id)
         return render_template("edit_book_citation.html", citation=citation)
     except Exception as error:
         flash(str(error))
         return redirect("/edit_book_citation")
 
+
 @main_controller.route("/edit_book_citation", methods=["POST"])
-def handle_edit_book_citation(): 
+def handle_edit_book_citation():
     try:
         csrf_token = request.form["csrf_token"]
         user_service.check_csrf(csrf_token)
@@ -235,28 +240,30 @@ def handle_edit_book_citation():
         editor = request.form.get("editor")
         publisher = request.form.get("publisher")
         year = request.form.get("year")
-        given_id = request.form.get("given_id")
         citation_service.edit_book_citation(
-            citation_id=citation_id, authors=authors, title=title, editor=editor, 
-            publisher=publisher, year=year, given_id=given_id)
+            citation_id=citation_id, authors=authors, title=title, editor=editor,
+            publisher=publisher, year=year)
         return redirect("/citations")
     except Exception as error:
         flash(str(error))
         return redirect("/edit_book_citation")
+
 
 @main_controller.route("/edit_article_citation", methods=["GET"])
 def render_edit_article_citation():
     try:
         owner_id = user_service.get_session_user_id()
         given_id = request.args.get("given_id")
-        citation = citation_service.get_content_by_id(given_id=given_id, owner_id=owner_id)
+        citation = citation_service.get_content_by_id(
+            given_id=given_id, owner_id=owner_id)
         return render_template("edit_article_citation.html", citation=citation)
     except Exception as error:
         flash(str(error))
         return redirect("/edit_article_citation")
 
+
 @main_controller.route("/edit_article_citation", methods=["POST"])
-def handle_edit_article_citation(): 
+def handle_edit_article_citation():
     try:
         csrf_token = request.form["csrf_token"]
         user_service.check_csrf(csrf_token)
@@ -265,15 +272,13 @@ def handle_edit_article_citation():
         title = request.form.get("title")
         journal = request.form.get("journal")
         year = request.form.get("year")
-        given_id = request.form.get("given_id")
         citation_service.edit_article_citation(
-            citation_id=citation_id, authors=authors, title=title, 
-            journal=journal, year=year, given_id=given_id)
+            citation_id=citation_id, authors=authors, title=title,
+            journal=journal, year=year,)
         return redirect("/citations")
     except Exception as error:
         flash(str(error))
         return redirect("/edit_article_citation")
-
 
 
 @main_controller.route("/download", methods=["GET"])

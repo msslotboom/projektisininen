@@ -1,21 +1,22 @@
 *** Settings ***
 Resource  resource.robot
 Resource  user_resource.robot
+Resource  citation_resource.robot
 Suite Setup  Open And Configure Browser
 Suite Teardown  Close Browser
-Test Setup  Create User And Login
+Test Setup  Reset Application, Create User And Login
 
 
 *** Test Cases ***
 Download Bibliography Of References
     Go To References Page
-    Click Link  Lataa
+    Click Link  Lataa viitetiedosto
     Sleep  1s
     File Should Exist  ${CURDIR}/../../templates/download.html
 
-Create Valid Sitation And Download Bibliography
+Create Valid Citation And Download Bibliography
     Go To References Page
-    Create Valid Sitation
-    Click Link  Lataa
+    Create Valid Book Citation
+    Click Link  Lataa viitetiedosto
     Sleep  1s
     File Should Not Be Empty  ${CURDIR}/../../templates/download.html

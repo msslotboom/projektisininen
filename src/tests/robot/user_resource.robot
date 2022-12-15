@@ -59,9 +59,11 @@ Create User And Login
     Click Button  Kirjaudu sisään
     Main Page Should Be Open
 
-Create Valid Sitation
-    Go To New Citation Page
-    Set Authors  Kirjoittaja
-    Set Title  Otsikko
-    Set Year  1234
-    Click Button  Luo viite
+Reset Application, Create User And Login
+    Reset Application
+    Create User  Paavo2  salasana1
+    Go To Login Page
+    Set Username  Paavo2
+    Set Password  salasana1
+    Click Button  Kirjaudu sisään
+    Main Page Should Be Open

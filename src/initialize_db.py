@@ -49,7 +49,7 @@ def create_tables():
         author TEXT,
         title TEXT,
         type TEXT,
-        other TEXT,
+        note TEXT,
         year INTEGER
     );
     """)

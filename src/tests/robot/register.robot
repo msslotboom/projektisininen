@@ -7,7 +7,7 @@ Test Setup  Reset Application And Go To Register Page
 
 *** Test Cases ***
 Register With Valid Username And Password
-    Set Username  Mikko
+    Set Username  Mikkoo
     Set Password  salasana123
     Set Password Confirmation  salasana123
     Submit Registration Credentials
