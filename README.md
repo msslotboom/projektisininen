@@ -17,11 +17,8 @@
 
 ### Asennus
 1. Asenna PostgreSQL
-    (ohjeita [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-22-04-quickstart)  tai [postgresql oma dokumentaatio](https://www.postgresql.org/docs/current/installation.html))
-2. Asenna riippuvuudet
-
-    ```poetry install```
-
+    (ohjeita: [DigitalOcean](https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-22-04-quickstart) ja [PostgreSQL:n dokumentaatio](https://www.postgresql.org/docs/current/installation.html))
+2. Asenna riippuvuudet komennolla ```poetry install```
 3. Luo projektin juureen tiedosto nimeltä `.env`, johon määrittelet PostgreSQL-tietokannan osoitteen `DATABASE_URL=postgresql:///tietokannan_nimi_tähän`. Tietokannan osoitteen muodostumisesta lisää [täällä](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING)
 4. Lisää `.env` tiedostoon myös generoitu `SECRET_KEY` ja `FLASK_DEBUG=1`
 5. Alusta tietokanta ajamalla tiedosto `initialize_db.py`
