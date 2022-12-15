@@ -1,6 +1,7 @@
 ![actions_badge](https://github.com/msslotboom/projektisininen/workflows/build/badge.svg)  
 
 [Linkki sovellukseen](https://projektisininen.fly.dev)  
+[Testikattavuus](https://app.codecov.io/github/msslotboom/projektisininen)  
   
 ## Backlogit
 [Product ja sprint backlogit](https://docs.google.com/spreadsheets/d/190t4pxaOxAFbWoXax1XO7td4qyt_bBqrh0JbS_d_AtI)  
