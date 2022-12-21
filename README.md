@@ -2,6 +2,9 @@
 
 [Linkki sovellukseen](https://projektisininen.fly.dev)  
 [Testikattavuus](https://app.codecov.io/github/msslotboom/projektisininen)  
+
+## Raportti
+[Miniprojektin raportti](https://docs.google.com/document/d/1lzmfPl4uKqpDJ7YmKdzRmUq5tcKaprgYjrlKBi3qqfI)
   
 ## Backlogit
 [Product ja sprint backlogit](https://docs.google.com/spreadsheets/d/190t4pxaOxAFbWoXax1XO7td4qyt_bBqrh0JbS_d_AtI)  
